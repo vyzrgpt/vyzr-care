@@ -229,15 +229,22 @@ function predictionStatement(p: RawPattern): { statement: string; nextConcern: s
         const rate = ratePerDay(s)
         const knowledge = knowledgeFor(def.id, s.abnormal ?? (def.worse === 'up' ? 'high' : 'low'))
         const complication = knowledge?.complication ?? 'complications'
-        if (p.projection?.threshold !== null && p.projection?.threshold !== undefined && p.projection.hoursToThreshold === 0) {
+        const threshold = p.projection?.threshold ?? null
+        if (threshold !== null && p.projection?.thresholdStatus === 'crossed') {
           return {
-            statement: `${def.label} is already beyond ~${formatValue(def.id, p.projection.threshold)} ${def.unit}, the range in which ${complication} become more likely, and is still ${s.deltaBaseline > 0 ? 'rising' : 'falling'} (${rate}). Further ${directionWord(s)} is plausible if the underlying process persists.`,
+            statement: `${def.label} is already beyond ~${formatValue(def.id, threshold)} ${def.unit}, the range in which ${complication} become more likely, and is still ${s.deltaBaseline > 0 ? 'rising' : 'falling'} (${rate}). Further ${directionWord(s)} is plausible if the underlying process persists.`,
             nextConcern: complication,
           }
         }
-        if (p.projection?.threshold !== null && p.projection?.threshold !== undefined && p.horizon) {
+        if (threshold !== null && p.projection?.thresholdStatus === 'overdue') {
           return {
-            statement: `At the current rate (${rate}), ${lower(def.label)} could reach ~${formatValue(def.id, p.projection.threshold)} ${def.unit} within ${HORIZON_LABEL[p.horizon]}, the range in which ${complication} become more likely.`,
+            statement: `At the rate last measured ${formatHours(p.projection.measuredHoursAgo)} ago (${rate}), ${lower(def.label)} would have reached ~${formatValue(def.id, threshold)} ${def.unit}, the range in which ${complication} become more likely, by now. No measurement since; the current value is unknown until repeated.`,
+            nextConcern: complication,
+          }
+        }
+        if (threshold !== null && p.horizon) {
+          return {
+            statement: `At the current rate (${rate}), ${lower(def.label)} could reach ~${formatValue(def.id, threshold)} ${def.unit} within ${HORIZON_LABEL[p.horizon]}, the range in which ${complication} become more likely.`,
             nextConcern: complication,
           }
         }
@@ -271,9 +278,10 @@ function predictionReasoning(p: RawPattern): string[] {
   }
   if (p.projection) {
     const def = SIGNALS[p.projection.signal]
-    let text = `Linear extrapolation of the last interval: ~${formatValue(def.id, p.projection.value24h)} ${def.unit} in 24 h`
-    if (p.projection.threshold !== null && p.projection.hoursToThreshold !== null) {
-      text += `; ${formatValue(def.id, p.projection.threshold)} ${def.unit} reached in ~${formatHours(p.projection.hoursToThreshold)} if unchanged`
+    const age = p.projection.measuredHoursAgo
+    let text = `Linear extrapolation of the last interval (latest measurement ${age > 0 ? `${formatHours(age)} ago` : 'at assessment time'}): ~${formatValue(def.id, p.projection.value24h)} ${def.unit} 24 h after that measurement`
+    if (p.projection.threshold !== null && p.projection.hoursToThreshold !== null && p.projection.thresholdStatus === 'ahead') {
+      text += `; ${formatValue(def.id, p.projection.threshold)} ${def.unit} reached in ~${formatHours(p.projection.hoursToThreshold)} from now if unchanged`
     }
     out.push(text + '. Extrapolation only; not a validated prediction.')
   }
@@ -293,6 +301,12 @@ function predictionUncertainty(p: RawPattern): string[] {
   }
   if (p.severity === 'watch' && p.kind === 'single_signal_trend') {
     out.push('Trend is short; it may be noise or the start of a pattern.')
+  }
+  if (!isQuiet(p)) {
+    const stale = p.series.filter((s) => s.hoursSinceLatest > ANALYSIS_CONFIG.staleAfterHours)
+    for (const s of stale) {
+      out.push(`Latest ${lower(s.signal.label)} is ${formatHours(s.hoursSinceLatest)} old at the assessment time; the current trajectory is unconfirmed until it is repeated.`)
+    }
   }
   return out
 }

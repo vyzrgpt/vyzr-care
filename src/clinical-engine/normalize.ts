@@ -10,6 +10,7 @@ import type {
   MedicationObservation,
   NumericObservation,
   PatientRecord,
+  ReferenceRange,
   SeriesPoint,
   SignalId,
 } from './types'
@@ -29,7 +30,16 @@ export interface NormalizedPatient {
 
 export interface SkippedObservation {
   observation: ClinicalObservation
-  reason: 'unknown_signal' | 'non_finite_value' | 'unsupported_unit'
+  reason: 'patient_mismatch' | 'unknown_signal' | 'non_finite_value' | 'unsupported_unit'
+}
+
+/** Converts a source reference range into the registry unit; null if either bound cannot be converted. */
+function convertRange(id: SignalId, range: ReferenceRange | undefined, unit: string): ReferenceRange | undefined {
+  if (!range) return undefined
+  const low = range.low === undefined ? undefined : toRegistryUnit(id, range.low, unit)
+  const high = range.high === undefined ? undefined : toRegistryUnit(id, range.high, unit)
+  if (low === null || high === null) return undefined
+  return { ...(low !== undefined ? { low } : {}), ...(high !== undefined ? { high } : {}) }
 }
 
 export function isNumeric(o: ClinicalObservation): o is NumericObservation {
@@ -60,6 +70,10 @@ export function normalizePatient(record: PatientRecord, asOf: string): Normalize
   const skipped: SkippedObservation[] = []
 
   for (const o of ordered) {
+    if (o.patientId !== record.patientId) {
+      skipped.push({ observation: o, reason: 'patient_mismatch' })
+      continue
+    }
     if (isNumeric(o)) {
       if (!(o.code in SIGNALS)) {
         skipped.push({ observation: o, reason: 'unknown_signal' })
@@ -75,7 +89,7 @@ export function normalizePatient(record: PatientRecord, asOf: string): Normalize
         continue
       }
       const list = series[o.code] ?? (series[o.code] = [])
-      const referenceRange = value === o.value ? o.referenceRange : undefined
+      const referenceRange = convertRange(o.code, o.referenceRange, o.unit)
       list.push({ observationId: o.id, time: o.time, value, ...(referenceRange ? { referenceRange } : {}) })
     } else if (isMedication(o)) {
       medications.push(o)

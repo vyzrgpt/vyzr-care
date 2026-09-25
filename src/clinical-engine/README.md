@@ -112,10 +112,19 @@ A composite fires when ≥ `minCore` core signals show meaningful worsening. Sev
 the shared importance score; strong/rapid concordance escalates to `concerning` / `urgent`.
 `multi_signal_recovery` fires when ≥ 3 previously abnormal signals improve and none worsen.
 
-**Orchestration (`engine.ts`)**: composites whose signal set is ≥ 75 % covered by a broader,
-at-least-as-severe composite are folded in (so a bleeding pattern is not also reported as a
-haemodynamic one); single-signal patterns explained by a composite are *absorbed*
-(`absorbedPatternIds`).
+**Orchestration (`engine.ts`)**: a composite is folded into a broader, at-least-as-severe
+composite only when every one of its signals is covered, or when the broader spec declares it
+may subsume it (`CompositeSpec.subsumes`) and covers ≥ 75 % of its signals — so bleeding folds in
+haemodynamic deterioration, but haemodynamic or multisystem deterioration never hides bleeding,
+whose haemoglobin signal they do not explain. Single-signal patterns explained by a composite
+are *absorbed* (`absorbedPatternIds`).
+
+**Freshness**: every analysis is anchored to `asOf`. `SeriesAnalysis.hoursSinceLatest` is the
+age of the latest measurement; threshold projections subtract it (`hoursToThreshold` is time
+from *now*, `thresholdStatus` is `ahead` / `crossed` / `overdue` when the extrapolated crossing
+has passed unconfirmed), and measurements older than `staleAfterHours` (24 h) are called out in
+`prediction.uncertainty`. A worsening trend also requires recent movement: a value that fell
+early and then plateaued is displaced from baseline but no longer *worsening*.
 
 ## Importance → severity (`scoring.ts`, `config.ts`)
 
@@ -178,6 +187,8 @@ agreement. The engine never emits a percentage.
   Layer 2 = `evidence[]`, `prediction.reasoning[]`, `prediction.uncertainty[]`, `importance`.
   Layer 3 = `series[signal].points`.
 - Time replay: call `assessPatient(record, { asOf })` with any instant; it is pure and fast (< 1 ms per patient).
+- `assessWard(records)` assesses every patient at one shared instant (default: the latest observation across the ward) so the ranking compares like with like; pass `asOf` to replay the whole ward.
+- Observations whose `patientId` differs from the record's are skipped (`normalizePatient(...).skipped`, reason `patient_mismatch`), as are unknown signals, non-finite values and unsupported units.
 - The UI must not re-derive severity, trajectory or confidence; those are the engine's.
 
 ## Limitations

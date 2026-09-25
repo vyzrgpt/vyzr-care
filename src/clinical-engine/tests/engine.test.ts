@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { NOW, PATIENTS, findPatient } from '../demo-data/patients'
 import { assessPatient, assessWard, severityRank } from '../engine'
+import { normalizePatient } from '../normalize'
+import { hasWorseningTrend } from '../trends'
 import type { PatientIntelligence, RecognizedPattern } from '../types'
-import { medication, numeric, record } from './helpers'
+import { at, medication, numeric, record } from './helpers'
 
 function patient(id: string): PatientIntelligence {
   const rec = findPatient(id)
@@ -274,5 +276,146 @@ describe('input units and reference ranges', () => {
     const pi = assessPatient(rec)
     expect(pi.series.sodium?.abnormal).toBeNull()
     expect(pi.series.sodium?.signal.low).toBe(130)
+  })
+
+  it('converts a source reference range into the registry unit, including for zero-valued measurements', () => {
+    const rec = record('range-units', {})
+    const glu = numeric('range-units', 'glucose', 0, 0)
+    rec.timeline.push({ ...glu, unit: 'mmol/L', referenceRange: { low: 4, high: 8 } })
+    const pi = assessPatient(rec)
+    expect(pi.series.glucose?.latest).toBe(0)
+    expect(pi.series.glucose?.signal.low).toBeCloseTo(72.1, 1)
+    expect(pi.series.glucose?.signal.high).toBeCloseTo(144.1, 1)
+    expect(pi.series.glucose?.abnormal).toBe('low')
+  })
+
+  it('observations carrying another patientId are skipped, never analysed', () => {
+    const rec = record('own', { sodium: [[0, 138], [24, 137]] })
+    rec.timeline.push(
+      numeric('other', 'sodium', 48, 120),
+      medication('other', 30, 'Hydrochlorothiazide', ['thiazide']),
+      { id: 'other-ev', patientId: 'other', time: at(30), category: 'symptom', description: 'Confusion' },
+    )
+    const np = normalizePatient(rec, at(48))
+    expect(np.skipped.filter((s) => s.reason === 'patient_mismatch')).toHaveLength(3)
+    expect(np.series.sodium?.map((p) => p.value)).toEqual([138, 137])
+    expect(np.medications).toHaveLength(0)
+    expect(np.events).toHaveLength(0)
+    const pi = assessPatient(rec, { asOf: at(48) })
+    expect(pi.series.sodium?.latest).toBe(137)
+    expect(pi.recognizedPatterns.some((p) => p.signals.includes('sodium') && p.severity !== 'stable')).toBe(false)
+    expect(pi.recognizedPatterns.flatMap((p) => p.evidence).some((e) => e.kind !== 'series')).toBe(false)
+  })
+})
+
+describe('composite subsumption', () => {
+  it('occult bleeding is kept alongside haemodynamic deterioration when haemoglobin is falling', () => {
+    const rec = record(
+      'bleed',
+      {
+        hemoglobin: [[0, 12.6], [24, 11.2], [48, 10.3], [72, 9.1]],
+        heart_rate: [[0, 76], [24, 84], [48, 92], [72, 104]],
+        systolic_bp: [[0, 136], [24, 128], [48, 122], [72, 108]],
+        urine_output: [[0, 70], [24, 60], [48, 55], [72, 45]],
+        // extra haemodynamic support so that hemodynamic_deterioration has at least as many signals
+        lactate: [[0, 1.0], [24, 1.4], [48, 2.1], [72, 2.8]],
+        respiratory_rate: [[0, 14], [24, 16], [48, 19], [72, 22]],
+        temperature: [[0, 36.8], [24, 37.2], [48, 37.7], [72, 38.1]],
+      },
+      [medication('bleed', -12, 'Apixaban 5 mg BD', ['anticoagulant'], 'continued')],
+    )
+    const pi = assessPatient(rec, { asOf: at(72) })
+    const bleeding = pi.recognizedPatterns.find((p) => p.patternId === 'occult_bleeding')
+    expect(bleeding).toBeDefined()
+    expect(bleeding!.signals).toContain('hemoglobin')
+    // haemodynamic deterioration alone does not explain the haemoglobin fall, so it may not hide bleeding
+    const hemo = pi.recognizedPatterns.find((p) => p.patternId === 'hemodynamic_deterioration')
+    if (hemo) expect(hemo.signals).not.toContain('hemoglobin')
+  })
+
+  it('a narrower composite fully covered by a broader one of equal severity is still folded in', () => {
+    const c = patient('pt-c')
+    expect(c.recognizedPatterns.some((p) => p.patternId === 'multisystem_deterioration')).toBe(true)
+    expect(c.recognizedPatterns.some((p) => p.patternId === 'hemodynamic_deterioration')).toBe(false)
+    expect(c.recognizedPatterns.some((p) => p.patternId === 'respiratory_deterioration')).toBe(false)
+  })
+})
+
+describe('plateaus and freshness', () => {
+  it('a deterioration that has plateaued is no longer an active worsening trend', () => {
+    // fell early, then flat for three intervals: still displaced from admission baseline, no longer moving
+    const rec = record('plateau', {
+      systolic_bp: [[0, 130], [12, 112], [24, 104], [36, 104], [48, 105], [60, 104]],
+      heart_rate: [[0, 72], [12, 88], [24, 100], [36, 100], [48, 99], [60, 100]],
+      urine_output: [[0, 70], [12, 50], [24, 40], [36, 40], [48, 41], [60, 40]],
+    })
+    const pi = assessPatient(rec, { asOf: at(60) })
+    expect(hasWorseningTrend(pi.series.systolic_bp!)).toBe(false)
+    expect(pi.recognizedPatterns.some((p) => p.kind === 'multi_signal_deterioration')).toBe(false)
+    expect(pi.overallTrajectory).not.toBe('worsening')
+    expect(pi.overallTrajectory).not.toBe('rapidly_worsening')
+  })
+
+  it('replaying well after the last measurement anchors the projection to `asOf` and flags stale data', () => {
+    const rec = record('stale', { sodium: [[0, 138], [24, 134], [48, 130]] })
+    const fresh = sodiumPattern(assessPatient(rec, { asOf: at(48) }))!
+    expect(fresh.prediction.projection?.thresholdStatus).toBe('ahead')
+    expect(fresh.prediction.projection?.measuredHoursAgo).toBe(0)
+    const freshHours = fresh.prediction.projection!.hoursToThreshold!
+    expect(freshHours).toBeGreaterThan(0)
+
+    // 12 h later, no new measurement: the same threshold is nearer, not the same distance away
+    const later = sodiumPattern(assessPatient(rec, { asOf: at(60) }))!
+    expect(later.prediction.projection?.measuredHoursAgo).toBe(12)
+    expect(later.prediction.projection?.hoursToThreshold).toBeCloseTo(freshHours - 12, 6)
+
+    // 3 days later: the extrapolated crossing time has passed without confirmation
+    const stale = sodiumPattern(assessPatient(rec, { asOf: at(48 + 72) }))!
+    expect(stale.prediction.projection?.thresholdStatus).toBe('overdue')
+    expect(stale.prediction.projection?.hoursToThreshold).toBe(0)
+    expect(stale.prediction.statement).not.toMatch(/already beyond/)
+    expect(stale.prediction.statement).toMatch(/would have reached/)
+    expect(stale.prediction.statement).toMatch(/No measurement since/)
+    expect(stale.prediction.uncertainty.some((u) => /old at the assessment time/.test(u))).toBe(true)
+    expect(fresh.prediction.uncertainty.some((u) => /old at the assessment time/.test(u))).toBe(false)
+  })
+})
+
+describe('patient-level aggregation', () => {
+  it('a rapidly worsening watch-level pattern makes the patient at least "worsening"', () => {
+    // fast fall while still within range: approaching abnormal, watch severity, rapid rate
+    const pi = assessPatient(record('rapid-watch', { sodium: [[0, 142], [12, 140], [24, 137]] }))
+    const p = sodiumPattern(pi)!
+    expect(p.trajectory).toBe('rapidly_worsening')
+    expect(p.severity).toBe('watch')
+    expect(['worsening', 'rapidly_worsening']).toContain(pi.overallTrajectory)
+  })
+
+  it('a changed signal belonging to a minor pattern is marked partOfPattern', () => {
+    const pi = assessPatient(record('minor-change', { glucose: [[0, 168], [24, 182], [48, 196]] }))
+    const p = pi.recognizedPatterns.find((r) => r.signals.includes('glucose'))!
+    expect(p.severity).toBe('minor')
+    const change = pi.changedSinceLastReview.find((c) => c.signal === 'glucose')!
+    expect(change.partOfPattern).toBe(true)
+  })
+
+  it('unbounded diagnostic signals are not reassured as "within range"', () => {
+    const pi = assessPatient(record('uosm-quiet', { urine_osmolality: [[0, 400], [24, 410]], urine_sodium: [[0, 30]], sodium: [[0, 140], [24, 139]] }))
+    const ids = pi.reassuringSignals.map((r) => r.signal)
+    expect(ids).not.toContain('urine_osmolality')
+    expect(ids).not.toContain('urine_sodium')
+    expect(pi.reassuringSignals.find((r) => r.signal === 'sodium')?.status).toBe('within_range')
+  })
+
+  it('assessWard assesses every patient at one shared default instant', () => {
+    const early = record('early', { sodium: [[0, 138], [24, 133], [48, 127]] })
+    const late = record('late', { sodium: [[0, 140], [96, 139]] })
+    const ward = assessWard([early, late])
+    const asOfs = new Set(ward.map((pi) => pi.asOf))
+    expect(asOfs.size).toBe(1)
+    expect([...asOfs][0]).toBe(at(96))
+    // an explicit asOf is respected for every patient
+    const replay = assessWard([early, late], { asOf: at(48) })
+    expect(new Set(replay.map((pi) => pi.asOf))).toEqual(new Set([at(48)]))
   })
 })

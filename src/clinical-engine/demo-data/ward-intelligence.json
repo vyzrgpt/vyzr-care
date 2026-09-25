@@ -87,6 +87,17 @@
           "partOfPattern": true
         },
         {
+          "signal": "glucose",
+          "label": "Glucose",
+          "unit": "mg/dL",
+          "previous": 182,
+          "latest": 196,
+          "delta": 14,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
           "signal": "spo2",
           "label": "Oxygen saturation",
           "unit": "%",
@@ -107,17 +118,6 @@
           "direction": "up",
           "time": "2026-09-25T08:00:00.000Z",
           "partOfPattern": true
-        },
-        {
-          "signal": "glucose",
-          "label": "Glucose",
-          "unit": "mg/dL",
-          "previous": 182,
-          "latest": 196,
-          "delta": 14,
-          "direction": "up",
-          "time": "2026-09-25T08:00:00.000Z",
-          "partOfPattern": false
         },
         {
           "signal": "potassium",
@@ -630,14 +630,16 @@
             "statement": "No evidence from this trend alone of rapid deterioration. Continue watching the trajectory.",
             "reasoning": [
               "Trajectory classified as \"Minor change\" from deterministic trend rules (not a statistical model).",
-              "Linear extrapolation of the last interval: ~210 mg/dL in 24 h; 300 mg/dL reached in ~7 d if unchanged. Extrapolation only; not a validated prediction."
+              "Linear extrapolation of the last interval (latest measurement at assessment time): ~210 mg/dL 24 h after that measurement; 300 mg/dL reached in ~7 d from now if unchanged. Extrapolation only; not a validated prediction."
             ],
             "uncertainty": [],
             "projection": {
               "signal": "glucose",
+              "measuredHoursAgo": 0,
               "value24h": 210,
               "threshold": 300,
-              "hoursToThreshold": 178.28571428571428
+              "hoursToThreshold": 178.28571428571428,
+              "thresholdStatus": "ahead"
             }
           },
           "prevention": {
@@ -765,6 +767,17 @@
       "oneLineSummary": "Rapid, sustained sodium decline over 2 d: 138 → 133 → 127 mmol/L (-11 from admission; -6 since the previous measurement).",
       "changedSinceLastReview": [
         {
+          "signal": "oxygen_lpm",
+          "label": "Supplemental oxygen",
+          "unit": "L/min",
+          "previous": 2,
+          "latest": 1,
+          "delta": -1,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
           "signal": "sodium",
           "label": "Sodium",
           "unit": "mmol/L",
@@ -774,17 +787,6 @@
           "direction": "down",
           "time": "2026-09-25T08:00:00.000Z",
           "partOfPattern": true
-        },
-        {
-          "signal": "oxygen_lpm",
-          "label": "Supplemental oxygen",
-          "unit": "L/min",
-          "previous": 2,
-          "latest": 1,
-          "delta": -1,
-          "direction": "down",
-          "time": "2026-09-25T08:00:00.000Z",
-          "partOfPattern": false
         },
         {
           "signal": "urine_output",
@@ -839,7 +841,7 @@
               "Trajectory classified as \"Rapidly worsening\" from deterministic trend rules (not a statistical model).",
               "Sertraline 50 mg (continued): recognised cause of hyponatraemia — a temporal association, not a confirmed cause.",
               "Hydrochlorothiazide 25 mg (started): recognised cause of hyponatraemia — a temporal association, not a confirmed cause.",
-              "Linear extrapolation of the last interval: ~121 mmol/L in 24 h; 125 mmol/L reached in ~8 h if unchanged. Extrapolation only; not a validated prediction."
+              "Linear extrapolation of the last interval (latest measurement at assessment time): ~121 mmol/L 24 h after that measurement; 125 mmol/L reached in ~8 h from now if unchanged. Extrapolation only; not a validated prediction."
             ],
             "uncertainty": [
               "Serum osmolality: no result recorded this admission.",
@@ -851,9 +853,11 @@
             ],
             "projection": {
               "signal": "sodium",
+              "measuredHoursAgo": 0,
               "value24h": 121,
               "threshold": 125,
-              "hoursToThreshold": 8
+              "hoursToThreshold": 8,
+              "thresholdStatus": "ahead"
             }
           },
           "prevention": {
@@ -1288,6 +1292,17 @@
           "partOfPattern": true
         },
         {
+          "signal": "crp",
+          "label": "C-reactive protein",
+          "unit": "mg/L",
+          "previous": 170,
+          "latest": 140,
+          "delta": -30,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
           "signal": "potassium",
           "label": "Potassium",
           "unit": "mmol/L",
@@ -1308,17 +1323,6 @@
           "direction": "down",
           "time": "2026-09-25T08:00:00.000Z",
           "partOfPattern": true
-        },
-        {
-          "signal": "crp",
-          "label": "C-reactive protein",
-          "unit": "mg/L",
-          "previous": 170,
-          "latest": 140,
-          "delta": -30,
-          "direction": "down",
-          "time": "2026-09-25T08:00:00.000Z",
-          "partOfPattern": false
         }
       ],
       "recognizedPatterns": [
@@ -2733,7 +2737,7 @@
           "delta": -1,
           "direction": "down",
           "time": "2026-09-25T08:00:00.000Z",
-          "partOfPattern": false
+          "partOfPattern": true
         },
         {
           "signal": "crp",
@@ -2744,7 +2748,7 @@
           "delta": -32,
           "direction": "down",
           "time": "2026-09-25T08:00:00.000Z",
-          "partOfPattern": false
+          "partOfPattern": true
         },
         {
           "signal": "wbc",
@@ -2755,7 +2759,7 @@
           "delta": -1.7,
           "direction": "down",
           "time": "2026-09-25T08:00:00.000Z",
-          "partOfPattern": false
+          "partOfPattern": true
         },
         {
           "signal": "respiratory_rate",
@@ -2766,7 +2770,7 @@
           "delta": -2,
           "direction": "down",
           "time": "2026-09-25T08:00:00.000Z",
-          "partOfPattern": false
+          "partOfPattern": true
         },
         {
           "signal": "heart_rate",
@@ -2777,7 +2781,7 @@
           "delta": -8,
           "direction": "down",
           "time": "2026-09-25T08:00:00.000Z",
-          "partOfPattern": false
+          "partOfPattern": true
         },
         {
           "signal": "temperature",
@@ -2788,7 +2792,7 @@
           "delta": -0.3,
           "direction": "down",
           "time": "2026-09-25T08:00:00.000Z",
-          "partOfPattern": false
+          "partOfPattern": true
         }
       ],
       "recognizedPatterns": [

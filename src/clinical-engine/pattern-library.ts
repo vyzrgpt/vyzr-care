@@ -303,6 +303,13 @@ export interface CompositeSpec {
   medicationRelation: string
   /** If true the pattern is only emitted when a context medication is present. */
   requireContextMedication?: boolean
+  /**
+   * Composite ids this pattern may fold in when it is at least as severe and shares most of
+   * their signals (`compositeOverlapToSubsume`). A composite that is not listed is only folded
+   * in when every one of its signals is covered, so a pattern with a distinguishing signal
+   * (e.g. haemoglobin for bleeding) is never hidden by a broader one that does not explain it.
+   */
+  subsumes?: string[]
   /** Investigations represented as signals: absence from the record is reported as missing information. */
   investigationSignals: SignalId[]
   prevention: PreventionTemplate
@@ -319,6 +326,7 @@ export const COMPOSITE_SPECS: CompositeSpec[] = [
     supporting: ['temperature', 'wbc', 'crp', 'platelets', 'bicarbonate', 'urea'],
     minCore: 4,
     minDomains: 3,
+    subsumes: ['hemodynamic_deterioration', 'renal_deterioration', 'respiratory_deterioration', 'inflammatory_escalation'],
     contextMedications: ['ace_inhibitor', 'arb', 'nsaid', 'antihypertensive', 'opioid', 'sedative'],
     medicationRelation: 'may blunt compensation or mask early deterioration',
     investigationSignals: ['lactate', 'creatinine', 'wbc', 'crp', 'hemoglobin'],
@@ -400,6 +408,7 @@ export const COMPOSITE_SPECS: CompositeSpec[] = [
     core: ['hemoglobin', 'heart_rate', 'systolic_bp'],
     supporting: ['urine_output', 'lactate'],
     minCore: 2,
+    subsumes: ['hemodynamic_deterioration'],
     contextMedications: ['anticoagulant', 'antiplatelet'],
     medicationRelation: 'increases bleeding risk',
     requireContextMedication: true,

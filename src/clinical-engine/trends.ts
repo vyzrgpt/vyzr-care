@@ -98,6 +98,7 @@ export function analyseSeries(patient: NormalizedPatient, signal: SignalId): Ser
   const deltaBaseline = latest - baseline
   const relativeDeltaBaseline = baseline !== 0 ? deltaBaseline / Math.abs(baseline) : 0
   const spanHours = hoursBetween(points[0].time, latestPoint.time)
+  const hoursSinceLatest = Math.max(0, hoursBetween(latestPoint.time, patient.asOf))
 
   // Per-interval velocities (units per day)
   const velocities: number[] = []
@@ -180,6 +181,7 @@ export function analyseSeries(patient: NormalizedPatient, signal: SignalId): Ser
     points,
     latest,
     latestTime: latestPoint.time,
+    hoursSinceLatest,
     previous,
     spanHours,
     abnormal,
@@ -205,15 +207,26 @@ export function analyseSeries(patient: NormalizedPatient, signal: SignalId): Ser
   }
 }
 
+/** Net change over the most recent two intervals (or one, for two-point series). */
+function recentDelta(s: SeriesAnalysis): { delta: number; from: number } | null {
+  const n = s.points.length
+  if (n < 2) return null
+  const from = s.points[Math.max(0, n - 3)].value
+  return { delta: s.latest - from, from }
+}
+
 /**
  * A series shows a sustained move in the worsening direction: either the latest change
  * is worsening with persistence, or the value has drifted from baseline by more than noise
- * in the worsening direction across the admission. A meaningful latest move toward normal
- * takes precedence over historical displacement from baseline.
+ * in the worsening direction across the admission *and is still moving that way* over the
+ * most recent intervals. A meaningful latest move toward normal takes precedence over
+ * historical displacement, and a plateau (no recent movement) is not worsening.
  */
 export function hasWorseningTrend(s: SeriesAnalysis): boolean {
   if (s.worsening && s.persistence >= 1) return true
   if (s.improving && s.persistence >= 1) return false
+  const recent = recentDelta(s)
+  if (!recent || !isWorseningDirection(s.signal, recent.delta, recent.from)) return false
   return isWorseningDelta(s.signal, s.deltaBaseline, s.baseline) && exceedsNoise(s.signal, s.deltaBaseline, 2)
 }
 

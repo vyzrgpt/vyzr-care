@@ -135,8 +135,8 @@ export interface NumericObservation extends ObservationBase {
   unit: string
   /**
    * Reference range supplied by the source, in the same unit as `value`. When present on the
-   * most recent observation of a series it overrides the registry range for that series;
-   * ignored when the value had to be unit-converted.
+   * most recent observation of a series it overrides the registry range for that series.
+   * Converted to the registry unit alongside `value`.
    */
   referenceRange?: ReferenceRange
 }
@@ -185,7 +185,7 @@ export interface SeriesPoint {
   time: string
   /** Value in the registry unit for the signal. */
   value: number
-  /** Source-supplied reference range (in the registry unit), when present. */
+  /** Source-supplied reference range, converted to the registry unit, when present. */
   referenceRange?: ReferenceRange
 }
 
@@ -194,6 +194,8 @@ export interface SeriesAnalysis {
   points: SeriesPoint[]
   latest: number
   latestTime: string
+  /** Age of the latest measurement at the assessment instant (`asOf`). */
+  hoursSinceLatest: number
   previous: number | null
   spanHours: number
   abnormal: 'high' | 'low' | null
@@ -334,9 +336,18 @@ export interface Prediction {
   /** Linear extrapolation behind the horizon, when one was computed. Extrapolation, not a model. */
   projection: {
     signal: SignalId
+    /** Age of the measurement the extrapolation starts from, at `asOf`. */
+    measuredHoursAgo: number
+    /** Value 24 h after the latest measurement at the latest rate. */
     value24h: number
     threshold: number | null
+    /**
+     * Hours from `asOf` until `threshold` at the latest rate. 0 when the threshold is already
+     * crossed (`thresholdStatus: 'crossed'`) or when the extrapolated crossing time has already
+     * passed without a newer measurement (`thresholdStatus: 'overdue'`).
+     */
     hoursToThreshold: number | null
+    thresholdStatus: 'ahead' | 'crossed' | 'overdue' | null
   } | null
 }
 

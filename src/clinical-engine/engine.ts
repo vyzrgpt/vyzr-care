@@ -8,7 +8,7 @@
  */
 import { ANALYSIS_CONFIG } from './config'
 import { explainPattern } from './explanations'
-import { normalizePatient } from './normalize'
+import { latestObservationTime, normalizePatient } from './normalize'
 import { COMPOSITE_SPECS } from './pattern-library'
 import { evaluateComposite, evaluateRecovery } from './patterns/composite'
 import { buildContext, type RawPattern } from './patterns/context'
@@ -50,15 +50,22 @@ function latestTimeIn(record: PatientRecord): string {
   return new Date(max).toISOString()
 }
 
+const SPEC_BY_ID = new Map(COMPOSITE_SPECS.map((spec) => [spec.id, spec]))
+
 function subsumeComposites(all: RawPattern[]): RawPattern[] {
-  // A composite whose signals are (almost) all contained in a broader composite of equal or
-  // higher severity adds no new information; keep only the broader pattern.
+  // A composite adds no new information when a broader composite of equal or higher severity
+  // covers every one of its signals, or declares that it may subsume it and covers most of
+  // them. Otherwise the narrower pattern's unmatched signal changes the interpretation and it
+  // is kept.
   const ranked = [...all].sort((a, b) => severityRank(b.severity) - severityRank(a.severity) || b.signals.length - a.signals.length || b.importance.total - a.importance.total)
   const kept: RawPattern[] = []
   for (const c of ranked) {
     const covered = kept.some((other) => {
+      if (other.signals.length < c.signals.length) return false
       const overlap = c.signals.filter((id) => other.signals.includes(id)).length / c.signals.length
-      return other.signals.length >= c.signals.length && overlap >= ANALYSIS_CONFIG.compositeOverlapToSubsume
+      if (overlap === 1) return true
+      const declared = SPEC_BY_ID.get(other.patternId)?.subsumes?.includes(c.patternId) ?? false
+      return declared && overlap >= ANALYSIS_CONFIG.compositeOverlapToSubsume
     })
     if (!covered) kept.push(c)
   }
@@ -96,7 +103,8 @@ function reassuringSignals(series: Partial<Record<SignalId, SeriesAnalysis>>, qu
   const out: ReassuringSignal[] = []
   for (const id of quietIds) {
     const s = series[id]
-    if (!s) continue
+    // Signals without any reference bound (diagnostic-only, e.g. urine studies) have no "range" to be within.
+    if (!s || (s.signal.low === undefined && s.signal.high === undefined)) continue
     out.push({ signal: id, label: s.signal.label, latest: s.latest, unit: s.signal.unit, status: 'within_range', reason: 'Within range; no movement beyond measurement noise.' })
   }
   for (const p of patterns) {
@@ -121,8 +129,9 @@ function reassuringSignals(series: Partial<Record<SignalId, SeriesAnalysis>>, qu
 }
 
 function overallTrajectory(active: RecognizedPattern[], series: Partial<Record<SignalId, SeriesAnalysis>>): OverallTrajectory {
-  if (active.some((p) => p.trajectory === 'rapidly_worsening' && severityRank(p.severity) >= severityRank('concerning'))) return 'rapidly_worsening'
-  if (active.some((p) => p.trajectory === 'worsening' && severityRank(p.severity) >= severityRank('watch'))) return 'worsening'
+  const deteriorating = active.filter((p) => (p.trajectory === 'worsening' || p.trajectory === 'rapidly_worsening') && severityRank(p.severity) >= severityRank('watch'))
+  if (deteriorating.some((p) => p.trajectory === 'rapidly_worsening' && severityRank(p.severity) >= severityRank('concerning'))) return 'rapidly_worsening'
+  if (deteriorating.length) return 'worsening'
   const all = Object.values(series).filter((s): s is SeriesAnalysis => !!s && !s.chronicStable)
   const improving = all.filter((s) => hasImprovingTrend(s) && !hasWorseningTrend(s)).length
   const worsening = all.filter((s) => hasWorseningTrend(s)).length
@@ -195,7 +204,7 @@ export function assessPatient(record: PatientRecord, options: AssessOptions = {}
   const overallAttentionState = recognizedPatterns.reduce<Severity>((acc, p) => (severityRank(p.severity) > severityRank(acc) ? p.severity : acc), 'stable')
   const trajectory = overallTrajectory(recognizedPatterns, series)
   const reassuring = reassuringSignals(series, quietIds, explained)
-  const patterned = new Set<SignalId>(recognizedPatterns.filter((p) => severityRank(p.severity) >= severityRank('watch')).flatMap((p) => p.signals))
+  const patterned = new Set<SignalId>(recognizedPatterns.flatMap((p) => p.signals))
 
   return {
     patientId: record.patientId,
@@ -212,8 +221,13 @@ export function assessPatient(record: PatientRecord, options: AssessOptions = {}
   }
 }
 
+/**
+ * Assesses every patient at one shared instant so the ward ranking compares like with like.
+ * Defaults to the latest observation across the whole ward when `asOf` is not supplied.
+ */
 export function assessWard(records: PatientRecord[], options: AssessOptions = {}): PatientIntelligence[] {
+  const asOf = options.asOf ?? latestObservationTime(records)
   return records
-    .map((r) => assessPatient(r, options))
+    .map((r) => assessPatient(r, { ...options, asOf }))
     .sort((a, b) => severityRank(b.overallAttentionState) - severityRank(a.overallAttentionState))
 }

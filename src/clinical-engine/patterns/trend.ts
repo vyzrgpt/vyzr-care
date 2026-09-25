@@ -199,13 +199,19 @@ export function evaluateTrend(ctx: RuleContext, s: SeriesAnalysis): RawPattern |
     const ahead = threshold !== null && isWorseningDirection(def, threshold - s.latest, s.latest)
     // Already at or past the threshold on the same abnormal side: hoursToThreshold = 0.
     const crossed = threshold !== null && !ahead && s.abnormal !== null && abnormalSide(def, threshold) === s.abnormal
-    const hours = threshold !== null && ahead ? hoursToThreshold(s, threshold) : crossed ? 0 : null
+    // Hours are anchored to `asOf`: time already elapsed since the latest measurement is subtracted.
+    const fromMeasurement = threshold !== null && ahead ? hoursToThreshold(s, threshold) : null
+    const hours = fromMeasurement !== null ? Math.max(0, fromMeasurement - s.hoursSinceLatest) : crossed ? 0 : null
     const validThreshold = ahead || crossed ? threshold : null
+    const status: NonNullable<Prediction['projection']>['thresholdStatus'] =
+      validThreshold === null ? null : crossed ? 'crossed' : fromMeasurement !== null && fromMeasurement <= s.hoursSinceLatest ? 'overdue' : 'ahead'
     projection = {
       signal: def.id,
+      measuredHoursAgo: s.hoursSinceLatest,
       value24h: s.projected24h,
       threshold: validThreshold,
       hoursToThreshold: validThreshold !== null ? hours : null,
+      thresholdStatus: status,
     }
     horizon = validThreshold !== null ? horizonFromHours(hours) : null
   }
