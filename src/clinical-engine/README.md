@@ -64,7 +64,12 @@ type ClinicalObservation = NumericObservation | MedicationObservation | EventObs
 ```
 
 Observation ids are carried through into evidence so every claim is traceable to a row in the
-timeline. A FHIR / EHR adapter would map `Observation` / `MedicationStatement` / `Procedure`
+timeline. Values are analysed in the registry unit (`signals.ts`): known alternative units are
+converted (`toRegistryUnit`, e.g. glucose mmol/L → mg/dL, creatinine µmol/L → mg/dL); anything
+else is listed in `NormalizedPatient.skipped` with a reason rather than scored. A
+`referenceRange` on the most recent observation overrides the registry range for that series.
+Bidirectional signals with no bounds (urine osmolality, urine sodium) are carried as evidence
+only and never form a trend pattern. A FHIR / EHR adapter would map `Observation` / `MedicationStatement` / `Procedure`
 resources into this flat model; nothing downstream would change.
 
 ## Temporal analysis (`trends.ts`)

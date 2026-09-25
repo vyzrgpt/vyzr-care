@@ -1,5 +1,5 @@
 import { SIGNALS } from '../signals'
-import type { ClinicalObservation, MedicationClass, PatientRecord, SignalId } from '../types'
+import type { ClinicalObservation, MedicationClass, NumericObservation, PatientRecord, SignalId } from '../types'
 
 export const T0 = '2026-01-01T08:00:00.000Z'
 
@@ -9,7 +9,7 @@ export function at(hours: number): string {
 
 let counter = 0
 
-export function numeric(patientId: string, code: SignalId, hours: number, value: number): ClinicalObservation {
+export function numeric(patientId: string, code: SignalId, hours: number, value: number): NumericObservation {
   const def = SIGNALS[code]
   counter += 1
   return { id: `${patientId}-${code}-${counter}`, patientId, time: at(hours), category: def.category, code, value, unit: def.unit }

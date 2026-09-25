@@ -6,7 +6,15 @@
 import { ANALYSIS_CONFIG } from '../config'
 import { knowledgeFor, type PreventionTemplate, type SignalKnowledge } from '../pattern-library'
 import { cap, scoreImportance, severityFromScore } from '../scoring'
-import { exceedsNoise, hasImprovingTrend, hasMeaningfulWorsening, hasWorseningTrend, hoursToThreshold, isWorseningDirection } from '../trends'
+import {
+  abnormalSide,
+  exceedsNoise,
+  hasImprovingTrend,
+  hasMeaningfulWorsening,
+  hasWorseningTrend,
+  hoursToThreshold,
+  isWorseningDirection,
+} from '../trends'
 import type { ImportanceComponents, Prediction, SeriesAnalysis, TimeHorizon, Trajectory } from '../types'
 import {
   associatedMedications,
@@ -188,8 +196,11 @@ export function evaluateTrend(ctx: RuleContext, s: SeriesAnalysis): RawPattern |
     if (threshold === null && knowledge?.concernThresholdBaselineMultiple) {
       threshold = s.baseline * knowledge.concernThresholdBaselineMultiple
     }
-    const hours = threshold !== null ? hoursToThreshold(s, threshold) : null
-    const validThreshold = threshold !== null && isWorseningDirection(def, threshold - s.latest, s.latest) ? threshold : null
+    const ahead = threshold !== null && isWorseningDirection(def, threshold - s.latest, s.latest)
+    // Already at or past the threshold on the same abnormal side: hoursToThreshold = 0.
+    const crossed = threshold !== null && !ahead && s.abnormal !== null && abnormalSide(def, threshold) === s.abnormal
+    const hours = threshold !== null && ahead ? hoursToThreshold(s, threshold) : crossed ? 0 : null
+    const validThreshold = ahead || crossed ? threshold : null
     projection = {
       signal: def.id,
       value24h: s.projected24h,

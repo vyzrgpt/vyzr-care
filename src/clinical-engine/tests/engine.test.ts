@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { NOW, PATIENTS, findPatient } from '../demo-data/patients'
 import { assessPatient, assessWard, severityRank } from '../engine'
 import type { PatientIntelligence, RecognizedPattern } from '../types'
-import { medication, record } from './helpers'
+import { medication, numeric, record } from './helpers'
 
 function patient(id: string): PatientIntelligence {
   const rec = findPatient(id)
@@ -223,5 +223,56 @@ describe('temporal replay', () => {
     expect(na!.latest).toBe(127)
     expect(na!.partOfPattern).toBe(true)
     expect(pi.changedSinceLastReview.find((c) => c.signal === 'respiratory_rate')).toBeUndefined()
+  })
+})
+
+describe('temporal edge cases', () => {
+  it('a meaningful rebound after a decline is improving, not still worsening from baseline', () => {
+    const p = sodiumPattern(assessPatient(record('na-rebound', { sodium: [[0, 138], [24, 127], [48, 130]] })))!
+    expect(p.trajectory).toBe('improving')
+    expect(p.interruptiveAlertJustified).toBe(false)
+  })
+
+  it('crossing to the opposite abnormal side is worsening, not improving', () => {
+    const p = sodiumPattern(assessPatient(record('na-cross', { sodium: [[0, 125], [24, 150]] })))!
+    expect(p.trajectory).not.toBe('improving')
+    expect(p.severity).not.toBe('stable')
+  })
+
+  it('a worsening value already past its concern threshold is not told "no threshold projected"', () => {
+    const p = sodiumPattern(assessPatient(record('na-deep', { sodium: [[0, 130], [24, 123], [48, 120]] })))!
+    expect(p.prediction.statement).not.toMatch(/No concern threshold is projected/)
+    expect(p.prediction.statement).toMatch(/already beyond/)
+    expect(p.prediction.projection?.hoursToThreshold).toBe(0)
+  })
+
+  it('unbounded diagnostic signals (urine osmolality) never form a deterioration pattern on their own', () => {
+    const pi = assessPatient(record('uosm', { urine_osmolality: [[0, 300], [24, 500], [48, 700]] }))
+    expect(pi.recognizedPatterns).toHaveLength(0)
+    expect(pi.overallAttentionState).toBe('stable')
+  })
+})
+
+describe('input units and reference ranges', () => {
+  it('converts known alternative units and skips unsupported ones instead of misreading them', () => {
+    const rec = record('units', {})
+    const glu = numeric('units', 'glucose', 0, 6)
+    rec.timeline.push({ ...glu, unit: 'mmol/L' })
+    const cr = numeric('units', 'creatinine', 0, 1.0)
+    rec.timeline.push({ ...cr, unit: 'mg/L' })
+    const pi = assessPatient(rec)
+    expect(pi.series.glucose?.latest).toBeCloseTo(108.1, 1)
+    expect(pi.series.glucose?.abnormal).toBeNull()
+    expect(pi.series.creatinine).toBeUndefined()
+    expect(pi.recognizedPatterns.some((p) => p.signals.includes('glucose') && p.severity !== 'stable')).toBe(false)
+  })
+
+  it('a source-supplied reference range takes precedence over the registry range', () => {
+    const rec = record('range', {})
+    const na = numeric('range', 'sodium', 0, 132)
+    rec.timeline.push({ ...na, referenceRange: { low: 130, high: 145 } })
+    const pi = assessPatient(rec)
+    expect(pi.series.sodium?.abnormal).toBeNull()
+    expect(pi.series.sodium?.signal.low).toBe(130)
   })
 })

@@ -34,6 +34,35 @@ export const SIGNALS: Record<SignalId, SignalDefinition> = Object.fromEntries(
 
 export const SIGNAL_IDS = defs.map((d) => d.id)
 
+/** Accepted alternative units per signal and the factor that converts them to the registry unit. */
+const UNIT_CONVERSIONS: Partial<Record<SignalId, Record<string, (v: number) => number>>> = {
+  glucose: { 'mmol/l': (v) => v * 18.016 },
+  creatinine: { 'umol/l': (v) => v / 88.42, 'µmol/l': (v) => v / 88.42, 'μmol/l': (v) => v / 88.42 },
+  urea: { 'mg/dl': (v) => v / 2.801 },
+  hemoglobin: { 'g/l': (v) => v / 10 },
+  temperature: { '°f': (v) => ((v - 32) * 5) / 9, 'f': (v) => ((v - 32) * 5) / 9 },
+  lactate: { 'mg/dl': (v) => v / 9.008 },
+}
+
+const UNIT_ALIASES: Record<string, string> = { 'x10^9/l': '×10⁹/l', 'x10e9/l': '×10⁹/l', '10^9/l': '×10⁹/l', 'bpm': '/min', 'breaths/min': '/min', 'beats/min': '/min', 'l/min': 'l/min', 'ml/hr': 'ml/h', 'c': '°c', 'mosm/kg h2o': 'mosm/kg' }
+
+function canonicalUnit(unit: string): string {
+  const u = unit.trim().toLowerCase().replace(/\s+/g, '')
+  return UNIT_ALIASES[u] ?? u
+}
+
+/**
+ * Converts an observed value to the registry unit for `id`. Returns null when the unit is
+ * neither the registry unit nor a known convertible alternative.
+ */
+export function toRegistryUnit(id: SignalId, value: number, unit: string): number | null {
+  const def = SIGNALS[id]
+  const observed = canonicalUnit(unit)
+  if (observed === canonicalUnit(def.unit) || (def.unit === '' && observed === '')) return value
+  const convert = UNIT_CONVERSIONS[id]?.[observed]
+  return convert ? convert(value) : null
+}
+
 export function formatValue(id: SignalId, value: number): string {
   const d = SIGNALS[id]
   return value.toFixed(d.decimals)

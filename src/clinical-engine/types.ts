@@ -133,7 +133,11 @@ export interface NumericObservation extends ObservationBase {
   name?: string
   value: number
   unit: string
-  /** Reference range supplied by the source; falls back to the signal registry. */
+  /**
+   * Reference range supplied by the source, in the same unit as `value`. When present on the
+   * most recent observation of a series it overrides the registry range for that series;
+   * ignored when the value had to be unit-converted.
+   */
   referenceRange?: ReferenceRange
 }
 
@@ -179,7 +183,10 @@ export type Direction = 'up' | 'down' | 'flat'
 export interface SeriesPoint {
   observationId: string
   time: string
+  /** Value in the registry unit for the signal. */
   value: number
+  /** Source-supplied reference range (in the registry unit), when present. */
+  referenceRange?: ReferenceRange
 }
 
 export interface SeriesAnalysis {

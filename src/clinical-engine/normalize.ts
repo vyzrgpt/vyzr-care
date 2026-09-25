@@ -3,7 +3,7 @@
  * series, medication events and clinical events the analysis operates on. Everything
  * after `asOf` is excluded so that the same record can be assessed at any point in time.
  */
-import { SIGNALS } from './signals'
+import { SIGNALS, toRegistryUnit } from './signals'
 import type {
   ClinicalObservation,
   EventObservation,
@@ -23,8 +23,13 @@ export interface NormalizedPatient {
   medications: MedicationObservation[]
   /** Time-ordered event observations up to `asOf`. */
   events: EventObservation[]
-  /** Observations that were skipped because their code/category is unknown. */
-  skipped: ClinicalObservation[]
+  /** Observations that could not be analysed, with the reason. */
+  skipped: SkippedObservation[]
+}
+
+export interface SkippedObservation {
+  observation: ClinicalObservation
+  reason: 'unknown_signal' | 'non_finite_value' | 'unsupported_unit'
 }
 
 export function isNumeric(o: ClinicalObservation): o is NumericObservation {
@@ -52,16 +57,26 @@ export function normalizePatient(record: PatientRecord, asOf: string): Normalize
   const series: Partial<Record<SignalId, SeriesPoint[]>> = {}
   const medications: MedicationObservation[] = []
   const events: EventObservation[] = []
-  const skipped: ClinicalObservation[] = []
+  const skipped: SkippedObservation[] = []
 
   for (const o of ordered) {
     if (isNumeric(o)) {
-      if (!(o.code in SIGNALS) || !Number.isFinite(o.value)) {
-        skipped.push(o)
+      if (!(o.code in SIGNALS)) {
+        skipped.push({ observation: o, reason: 'unknown_signal' })
+        continue
+      }
+      if (!Number.isFinite(o.value)) {
+        skipped.push({ observation: o, reason: 'non_finite_value' })
+        continue
+      }
+      const value = toRegistryUnit(o.code, o.value, o.unit)
+      if (value === null) {
+        skipped.push({ observation: o, reason: 'unsupported_unit' })
         continue
       }
       const list = series[o.code] ?? (series[o.code] = [])
-      list.push({ observationId: o.id, time: o.time, value: o.value })
+      const referenceRange = value === o.value ? o.referenceRange : undefined
+      list.push({ observationId: o.id, time: o.time, value, ...(referenceRange ? { referenceRange } : {}) })
     } else if (isMedication(o)) {
       medications.push(o)
     } else {

@@ -5,7 +5,7 @@
 import { ANALYSIS_CONFIG } from './config'
 import type { NormalizedPatient } from './normalize'
 import { SIGNALS } from './signals'
-import type { Direction, SeriesAnalysis, SignalDefinition, SignalId } from './types'
+import type { Direction, SeriesAnalysis, SeriesPoint, SignalDefinition, SignalId } from './types'
 
 export const HOUR_MS = 3_600_000
 
@@ -35,30 +35,48 @@ export function abnormalMagnitude(def: SignalDefinition, value: number): number 
   return 0
 }
 
+/**
+ * The definition used to analyse a series: the registry entry, with the reference range
+ * replaced by the source-supplied range of the most recent point when one is present.
+ */
+export function effectiveDefinition(def: SignalDefinition, points: SeriesPoint[]): SignalDefinition {
+  const range = points.length ? points[points.length - 1].referenceRange : undefined
+  if (!range) return def
+  return { ...def, low: range.low ?? def.low, high: range.high ?? def.high }
+}
+
 /** Whether a change of `delta` is in the signal's worsening direction (ignoring noise). */
 export function isWorseningDirection(def: SignalDefinition, delta: number, from: number): boolean {
   if (delta === 0) return false
   if (def.worse === 'up') return delta > 0
   if (def.worse === 'down') return delta < 0
-  const centre = rangeCentre(def)
-  return Math.abs(from + delta - centre) > Math.abs(from - centre)
+  return bidirectionalWorsening(def, from, from + delta)
 }
 
 /** Whether a change of `delta` is in the signal's worsening direction and beyond noise. */
 export function isWorseningDelta(def: SignalDefinition, delta: number, from: number): boolean {
   if (!exceedsNoise(def, delta)) return false
-  if (def.worse === 'up') return delta > 0
-  if (def.worse === 'down') return delta < 0
-  // 'both': moving away from the centre of the range is worsening
-  const centre = rangeCentre(def)
-  return Math.abs(from + delta - centre) > Math.abs(from - centre)
+  return isWorseningDirection(def, delta, from)
 }
 
-function rangeCentre(def: SignalDefinition): number {
+/**
+ * For 'both'-direction signals: landing outside the range on a side the series did not start
+ * on is worsening, otherwise moving away from the centre of the range is worsening. Signals
+ * without any bound (e.g. urine osmolality) have no defined worsening direction.
+ */
+function bidirectionalWorsening(def: SignalDefinition, from: number, to: number): boolean {
+  const centre = rangeCentre(def)
+  if (centre === null) return false
+  const toSide = abnormalSide(def, to)
+  if (toSide !== null && toSide !== abnormalSide(def, from)) return true
+  return Math.abs(to - centre) > Math.abs(from - centre)
+}
+
+function rangeCentre(def: SignalDefinition): number | null {
   if (def.low !== undefined && def.high !== undefined) return (def.low + def.high) / 2
   if (def.low !== undefined) return def.low
   if (def.high !== undefined) return def.high
-  return 0
+  return null
 }
 
 function directionOf(def: SignalDefinition, delta: number): Direction {
@@ -67,9 +85,9 @@ function directionOf(def: SignalDefinition, delta: number): Direction {
 }
 
 export function analyseSeries(patient: NormalizedPatient, signal: SignalId): SeriesAnalysis | null {
-  const def = SIGNALS[signal]
   const points = patient.series[signal] ?? []
   if (points.length === 0) return null
+  const def = effectiveDefinition(SIGNALS[signal], points)
 
   const latestPoint = points[points.length - 1]
   const latest = latestPoint.value
@@ -190,10 +208,12 @@ export function analyseSeries(patient: NormalizedPatient, signal: SignalId): Ser
 /**
  * A series shows a sustained move in the worsening direction: either the latest change
  * is worsening with persistence, or the value has drifted from baseline by more than noise
- * in the worsening direction across the admission.
+ * in the worsening direction across the admission. A meaningful latest move toward normal
+ * takes precedence over historical displacement from baseline.
  */
 export function hasWorseningTrend(s: SeriesAnalysis): boolean {
   if (s.worsening && s.persistence >= 1) return true
+  if (s.improving && s.persistence >= 1) return false
   return isWorseningDelta(s.signal, s.deltaBaseline, s.baseline) && exceedsNoise(s.signal, s.deltaBaseline, 2)
 }
 

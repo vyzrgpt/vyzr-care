@@ -229,6 +229,12 @@ function predictionStatement(p: RawPattern): { statement: string; nextConcern: s
         const rate = ratePerDay(s)
         const knowledge = knowledgeFor(def.id, s.abnormal ?? (def.worse === 'up' ? 'high' : 'low'))
         const complication = knowledge?.complication ?? 'complications'
+        if (p.projection?.threshold !== null && p.projection?.threshold !== undefined && p.projection.hoursToThreshold === 0) {
+          return {
+            statement: `${def.label} is already beyond ~${formatValue(def.id, p.projection.threshold)} ${def.unit}, the range in which ${complication} become more likely, and is still ${s.deltaBaseline > 0 ? 'rising' : 'falling'} (${rate}). Further ${directionWord(s)} is plausible if the underlying process persists.`,
+            nextConcern: complication,
+          }
+        }
         if (p.projection?.threshold !== null && p.projection?.threshold !== undefined && p.horizon) {
           return {
             statement: `At the current rate (${rate}), ${lower(def.label)} could reach ~${formatValue(def.id, p.projection.threshold)} ${def.unit} within ${HORIZON_LABEL[p.horizon]}, the range in which ${complication} become more likely.`,

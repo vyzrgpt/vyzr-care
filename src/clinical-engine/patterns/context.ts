@@ -116,7 +116,7 @@ export function seriesEvidence(s: SeriesAnalysis, role: 'core' | 'supporting'): 
     label: s.signal.label,
     unit: s.signal.unit,
     role,
-    values: s.points,
+    values: s.points.map(({ observationId, time, value }) => ({ observationId, time, value })),
     direction: s.direction,
     deltaPrevious: s.deltaPrevious,
     deltaBaseline: s.deltaBaseline,
