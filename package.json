@@ -1,0 +1,19 @@
+{
+  "name": "vyzr-care",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "engine:test": "vitest run",
+    "engine:typecheck": "tsc -p tsconfig.engine.json",
+    "engine:fixture": "tsx scripts/generate-fixture.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.engine.json"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.6",
+    "tsx": "^4.20.0",
+    "typescript": "~6.0.2",
+    "vitest": "^4.1.11"
+  }
+}

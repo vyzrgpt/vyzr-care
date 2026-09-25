@@ -1,0 +1,4017 @@
+{
+  "asOf": "2026-09-25T08:00:00.000Z",
+  "patients": [
+    {
+      "patientId": "pt-c",
+      "generatedAt": "2026-09-25T08:00:00.000Z",
+      "asOf": "2026-09-25T08:00:00.000Z",
+      "overallTrajectory": "rapidly_worsening",
+      "overallAttentionState": "urgent",
+      "oneLineSummary": "9 signals moving in the same direction over 2 d: O₂ 2.0 → 5.0 L/min, RR 18 → 27 /min, SpO₂ 96 → 92 %, SBP 126 → 98 mmHg, HR 84 → 108 /min, UO 60 → 24 mL/h, Cr 0.90 → 1.50 mg/dL; also Temp ↑, WBC ↑.",
+      "changedSinceLastReview": [
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "unit": "mL/h",
+          "previous": 42,
+          "latest": 24,
+          "delta": -18,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "oxygen_lpm",
+          "label": "Supplemental oxygen",
+          "unit": "L/min",
+          "previous": 3,
+          "latest": 5,
+          "delta": 2,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "creatinine",
+          "label": "Creatinine",
+          "unit": "mg/dL",
+          "previous": 1.2,
+          "latest": 1.5,
+          "delta": 0.3,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "respiratory_rate",
+          "label": "Respiratory rate",
+          "unit": "/min",
+          "previous": 22,
+          "latest": 27,
+          "delta": 5,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "wbc",
+          "label": "White cell count",
+          "unit": "×10⁹/L",
+          "previous": 13.2,
+          "latest": 15.8,
+          "delta": 2.6,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "systolic_bp",
+          "label": "Systolic blood pressure",
+          "unit": "mmHg",
+          "previous": 110,
+          "latest": 98,
+          "delta": -12,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "heart_rate",
+          "label": "Heart rate",
+          "unit": "/min",
+          "previous": 96,
+          "latest": 108,
+          "delta": 12,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "glucose",
+          "label": "Glucose",
+          "unit": "mg/dL",
+          "previous": 182,
+          "latest": 196,
+          "delta": 14,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "spo2",
+          "label": "Oxygen saturation",
+          "unit": "%",
+          "previous": 94,
+          "latest": 92,
+          "delta": -2,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "temperature",
+          "label": "Temperature",
+          "unit": "°C",
+          "previous": 37.8,
+          "latest": 38.3,
+          "delta": 0.5,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "potassium",
+          "label": "Potassium",
+          "unit": "mmol/L",
+          "previous": 4.4,
+          "latest": 4.7,
+          "delta": 0.3,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        }
+      ],
+      "recognizedPatterns": [
+        {
+          "id": "pt-c:multisystem_deterioration",
+          "patternId": "multisystem_deterioration",
+          "kind": "multi_signal_deterioration",
+          "clinicalDomain": "multi_system",
+          "title": "Multisystem deterioration",
+          "severity": "urgent",
+          "trajectory": "rapidly_worsening",
+          "confidenceLevel": "high",
+          "recognition": {
+            "headline": "9 signals moving in the same direction over 2 d: O₂ 2.0 → 5.0 L/min, RR 18 → 27 /min, SpO₂ 96 → 92 %, SBP 126 → 98 mmHg, HR 84 → 108 /min, UO 60 → 24 mL/h, Cr 0.90 → 1.50 mg/dL; also Temp ↑, WBC ↑.",
+            "explanation": "Detected: concordant worsening across 7 core signals in 3 domain(s). Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "concordant worsening across 7 core signals in 3 domain(s)",
+            "supportingObservations": [
+              "Supplemental oxygen: 2.0 → 3.0 → 5.0 L/min over 2 d",
+              "Respiratory rate: 18 → 22 → 27 /min over 2 d",
+              "Oxygen saturation: 96 → 94 → 92 % over 2 d",
+              "Systolic blood pressure: 126 → 110 → 98 mmHg over 2 d",
+              "Heart rate: 84 → 96 → 108 /min over 2 d",
+              "Urine output: 60 → 50 → 42 → 33 → 24 mL/h over 2 d",
+              "Creatinine: 0.90 → 1.20 → 1.50 mg/dL over 2 d",
+              "Temperature: 37.2 → 37.8 → 38.3 °C over 2 d (supporting)",
+              "White cell count: 11.5 → 13.2 → 15.8 ×10⁹/L over 2 d (supporting)",
+              "Ramipril 10 mg continued Day 0 00:00 — long-term",
+              "Ibuprofen 400 mg PRN continued Day 0 00:00 — taken twice daily for leg pain",
+              "Day 1 22:00 (nursing): Patient reports feeling \"washed out\"; less interested in food"
+            ]
+          },
+          "prediction": {
+            "trajectory": "rapidly_worsening",
+            "timeHorizon": "hours",
+            "plausibleNextConcern": "multi-organ dysfunction (shock, respiratory failure, acute kidney injury)",
+            "statement": "Concordant movement across respiratory, haemodynamic, renal, inflammatory is the kind of trajectory that precedes multi-organ dysfunction (shock, respiratory failure, acute kidney injury). If unchanged, further deterioration within hours is plausible.",
+            "reasoning": [
+              "Trajectory classified as \"Rapidly worsening\" from deterministic trend rules (not a statistical model).",
+              "7 core and 2 supporting signals move concordantly; the combination, not any single value, drives the severity.",
+              "Ramipril 10 mg (continued): may blunt compensation or mask early deterioration — a temporal association, not a confirmed cause.",
+              "Ibuprofen 400 mg PRN (continued): may blunt compensation or mask early deterioration — a temporal association, not a confirmed cause."
+            ],
+            "uncertainty": [
+              "Lactate: no result recorded this admission.",
+              "C-reactive protein: no result recorded this admission.",
+              "Which of the candidate causes is operating cannot be determined from the recorded data alone."
+            ],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "Consider: Evolving sepsis (occult or inadequately controlled source); Hypovolaemia or haemorrhage; Cardiogenic or pulmonary cause (fluid overload, embolism). Review Ramipril 10 mg, Ibuprofen 400 mg PRN (may blunt compensation or mask early deterioration). Check: Lactate and blood gas; Blood cultures and infection screen; Fluid balance and volume assessment; Bedside reassessment sooner than the routine round. Not yet available: Lactate, C-reactive protein.",
+            "causesToConsider": [
+              "Evolving sepsis (occult or inadequately controlled source)",
+              "Hypovolaemia or haemorrhage",
+              "Cardiogenic or pulmonary cause (fluid overload, embolism)",
+              "Medication effect on haemodynamics or ventilation"
+            ],
+            "contextualFactors": [
+              "Ramipril 10 mg (continued): may blunt compensation or mask early deterioration",
+              "Ibuprofen 400 mg PRN (continued): may blunt compensation or mask early deterioration"
+            ],
+            "investigationsToConsider": [
+              "Lactate and blood gas",
+              "Blood cultures and infection screen",
+              "Fluid balance and volume assessment",
+              "ECG and chest imaging"
+            ],
+            "missingInformation": [
+              {
+                "label": "Lactate",
+                "reason": "No result recorded this admission",
+                "signal": "lactate"
+              },
+              {
+                "label": "C-reactive protein",
+                "reason": "No result recorded this admission",
+                "signal": "crp"
+              }
+            ],
+            "reassessmentPoints": [
+              "Bedside reassessment sooner than the routine round",
+              "Escalation threshold and ceiling of care agreed with the team",
+              "RAAS blockers, NSAIDs and sedating medications"
+            ],
+            "complicationToAvoid": "multi-organ dysfunction (shock, respiratory failure, acute kidney injury)"
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "oxygen_lpm",
+              "label": "Supplemental oxygen",
+              "unit": "L/min",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-c-oxygen_lpm-001",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 2
+                },
+                {
+                  "observationId": "pt-c-oxygen_lpm-002",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 3
+                },
+                {
+                  "observationId": "pt-c-oxygen_lpm-003",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 5
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 2,
+              "deltaBaseline": 3,
+              "velocityPerDay": 2,
+              "abnormal": "high",
+              "summary": "2.0 → 3.0 → 5.0 L/min"
+            },
+            {
+              "kind": "series",
+              "signal": "respiratory_rate",
+              "label": "Respiratory rate",
+              "unit": "/min",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-c-respiratory_rate-004",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 18
+                },
+                {
+                  "observationId": "pt-c-respiratory_rate-005",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 22
+                },
+                {
+                  "observationId": "pt-c-respiratory_rate-006",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 27
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 5,
+              "deltaBaseline": 9,
+              "velocityPerDay": 5,
+              "abnormal": "high",
+              "summary": "18 → 22 → 27 /min"
+            },
+            {
+              "kind": "series",
+              "signal": "spo2",
+              "label": "Oxygen saturation",
+              "unit": "%",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-c-spo2-007",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 96
+                },
+                {
+                  "observationId": "pt-c-spo2-008",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 94
+                },
+                {
+                  "observationId": "pt-c-spo2-009",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 92
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -2,
+              "deltaBaseline": -4,
+              "velocityPerDay": -2,
+              "abnormal": "low",
+              "summary": "96 → 94 → 92 %"
+            },
+            {
+              "kind": "series",
+              "signal": "systolic_bp",
+              "label": "Systolic blood pressure",
+              "unit": "mmHg",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-c-systolic_bp-010",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 126
+                },
+                {
+                  "observationId": "pt-c-systolic_bp-011",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 110
+                },
+                {
+                  "observationId": "pt-c-systolic_bp-012",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 98
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -12,
+              "deltaBaseline": -28,
+              "velocityPerDay": -12,
+              "abnormal": "low",
+              "summary": "126 → 110 → 98 mmHg"
+            },
+            {
+              "kind": "series",
+              "signal": "heart_rate",
+              "label": "Heart rate",
+              "unit": "/min",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-c-heart_rate-013",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 84
+                },
+                {
+                  "observationId": "pt-c-heart_rate-014",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 96
+                },
+                {
+                  "observationId": "pt-c-heart_rate-015",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 108
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 12,
+              "deltaBaseline": 24,
+              "velocityPerDay": 12,
+              "abnormal": "high",
+              "summary": "84 → 96 → 108 /min"
+            },
+            {
+              "kind": "series",
+              "signal": "urine_output",
+              "label": "Urine output",
+              "unit": "mL/h",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-c-urine_output-019",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 60
+                },
+                {
+                  "observationId": "pt-c-urine_output-020",
+                  "time": "2026-09-23T20:00:00.000Z",
+                  "value": 50
+                },
+                {
+                  "observationId": "pt-c-urine_output-021",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 42
+                },
+                {
+                  "observationId": "pt-c-urine_output-022",
+                  "time": "2026-09-24T20:00:00.000Z",
+                  "value": 33
+                },
+                {
+                  "observationId": "pt-c-urine_output-023",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 24
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -9,
+              "deltaBaseline": -36,
+              "velocityPerDay": -18,
+              "abnormal": "low",
+              "summary": "60 → 50 → 42 → 33 → 24 mL/h"
+            },
+            {
+              "kind": "series",
+              "signal": "creatinine",
+              "label": "Creatinine",
+              "unit": "mg/dL",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-c-creatinine-016",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 0.9
+                },
+                {
+                  "observationId": "pt-c-creatinine-017",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 1.2
+                },
+                {
+                  "observationId": "pt-c-creatinine-018",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 1.5
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 0.30000000000000004,
+              "deltaBaseline": 0.6,
+              "velocityPerDay": 0.30000000000000004,
+              "abnormal": "high",
+              "summary": "0.90 → 1.20 → 1.50 mg/dL"
+            },
+            {
+              "kind": "series",
+              "signal": "temperature",
+              "label": "Temperature",
+              "unit": "°C",
+              "role": "supporting",
+              "values": [
+                {
+                  "observationId": "pt-c-temperature-024",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 37.2
+                },
+                {
+                  "observationId": "pt-c-temperature-025",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 37.8
+                },
+                {
+                  "observationId": "pt-c-temperature-026",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 38.3
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 0.5,
+              "deltaBaseline": 1.0999999999999943,
+              "velocityPerDay": 0.5,
+              "abnormal": "high",
+              "summary": "37.2 → 37.8 → 38.3 °C"
+            },
+            {
+              "kind": "series",
+              "signal": "wbc",
+              "label": "White cell count",
+              "unit": "×10⁹/L",
+              "role": "supporting",
+              "values": [
+                {
+                  "observationId": "pt-c-wbc-027",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 11.5
+                },
+                {
+                  "observationId": "pt-c-wbc-028",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 13.2
+                },
+                {
+                  "observationId": "pt-c-wbc-029",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 15.8
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 2.6000000000000014,
+              "deltaBaseline": 4.300000000000001,
+              "velocityPerDay": 2.6000000000000014,
+              "abnormal": "high",
+              "summary": "11.5 → 13.2 → 15.8 ×10⁹/L"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-c-med-042",
+              "name": "Ramipril 10 mg",
+              "classes": [
+                "ace_inhibitor",
+                "antihypertensive"
+              ],
+              "action": "continued",
+              "time": "2026-09-23T08:00:00.000Z",
+              "relation": "may blunt compensation or mask early deterioration",
+              "detail": "long-term"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-c-med-043",
+              "name": "Ibuprofen 400 mg PRN",
+              "classes": [
+                "nsaid"
+              ],
+              "action": "continued",
+              "time": "2026-09-23T08:00:00.000Z",
+              "relation": "may blunt compensation or mask early deterioration",
+              "detail": "taken twice daily for leg pain"
+            },
+            {
+              "kind": "event",
+              "observationId": "pt-c-nursing-046",
+              "category": "nursing",
+              "time": "2026-09-25T06:00:00.000Z",
+              "description": "Patient reports feeling \"washed out\"; less interested in food"
+            }
+          ],
+          "causesToConsider": [
+            "Evolving sepsis (occult or inadequately controlled source)",
+            "Hypovolaemia or haemorrhage",
+            "Cardiogenic or pulmonary cause (fluid overload, embolism)",
+            "Medication effect on haemodynamics or ventilation"
+          ],
+          "investigationsToConsider": [
+            "Lactate and blood gas",
+            "Blood cultures and infection screen",
+            "Fluid balance and volume assessment",
+            "ECG and chest imaging"
+          ],
+          "missingInformation": [
+            {
+              "label": "Lactate",
+              "reason": "No result recorded this admission",
+              "signal": "lactate"
+            },
+            {
+              "label": "C-reactive protein",
+              "reason": "No result recorded this admission",
+              "signal": "crp"
+            }
+          ],
+          "timeHorizon": "hours",
+          "interruptiveAlertJustified": true,
+          "signals": [
+            "oxygen_lpm",
+            "respiratory_rate",
+            "spo2",
+            "systolic_bp",
+            "heart_rate",
+            "urine_output",
+            "creatinine",
+            "temperature",
+            "wbc"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 1.0462962962962965,
+              "rateOfChange": 0.9351851851851853,
+              "persistence": 3,
+              "acceleration": 0,
+              "crossVariableAgreement": 9,
+              "context": 2,
+              "novelty": 1.5,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 1.0462962962962965,
+              "rateOfChange": 0.9351851851851853,
+              "persistence": 1.5,
+              "acceleration": 0,
+              "crossVariableAgreement": 2.6999999999999997,
+              "context": 1,
+              "novelty": 0.75,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": 7.93
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": [
+            "pt-c:single_signal_trend:creatinine",
+            "pt-c:single_signal_trend:wbc",
+            "pt-c:single_signal_trend:systolic_bp",
+            "pt-c:single_signal_trend:heart_rate",
+            "pt-c:single_signal_trend:respiratory_rate",
+            "pt-c:single_signal_trend:spo2",
+            "pt-c:single_signal_trend:oxygen_lpm",
+            "pt-c:single_signal_trend:temperature",
+            "pt-c:single_signal_trend:urine_output"
+          ]
+        },
+        {
+          "id": "pt-c:single_signal_trend:glucose",
+          "patternId": "single_signal_trend",
+          "kind": "single_signal_trend",
+          "clinicalDomain": "metabolic",
+          "title": "Glucose: mildly high, minor change",
+          "severity": "minor",
+          "trajectory": "minor_change",
+          "confidenceLevel": "high",
+          "recognition": {
+            "headline": "Mildly high glucose, small upward drift: 168 → 182 → 196 mg/dL over 2 d (+28 from admission; +14 since the previous measurement). Change since the previous measurement is small.",
+            "explanation": "Detected: minor change; no escalation signal. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "minor change; no escalation signal",
+            "supportingObservations": [
+              "Glucose: 168 → 182 → 196 mg/dL over 2 d"
+            ]
+          },
+          "prediction": {
+            "trajectory": "minor_change",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "No evidence from this trend alone of rapid deterioration. Continue watching the trajectory.",
+            "reasoning": [
+              "Trajectory classified as \"Minor change\" from deterministic trend rules (not a statistical model).",
+              "Linear extrapolation of the last interval (latest measurement at assessment time): ~210 mg/dL 24 h after that measurement; 300 mg/dL reached in ~7 d from now if unchanged. Extrapolation only; not a validated prediction."
+            ],
+            "uncertainty": [],
+            "projection": {
+              "signal": "glucose",
+              "measuredHoursAgo": 0,
+              "value24h": 210,
+              "threshold": 300,
+              "hoursToThreshold": 178.28571428571428,
+              "thresholdStatus": "ahead"
+            }
+          },
+          "prevention": {
+            "statement": "No urgent signal generated. Reassess if the change persists or associated clinical changes appear.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "glucose",
+              "label": "Glucose",
+              "unit": "mg/dL",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-c-glucose-036",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 168
+                },
+                {
+                  "observationId": "pt-c-glucose-037",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 182
+                },
+                {
+                  "observationId": "pt-c-glucose-038",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 196
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 14,
+              "deltaBaseline": 28,
+              "velocityPerDay": 14,
+              "abnormal": "high",
+              "summary": "168 → 182 → 196 mg/dL"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "glucose"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 1.4,
+              "rateOfChange": 0.35,
+              "persistence": 1,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 1.4,
+              "rateOfChange": 0.35,
+              "persistence": 0.5,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": 2.25
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": []
+        }
+      ],
+      "reassuringSignals": [
+        {
+          "signal": "sodium",
+          "label": "Sodium",
+          "latest": 136,
+          "unit": "mmol/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "potassium",
+          "label": "Potassium",
+          "latest": 4.7,
+          "unit": "mmol/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "hemoglobin",
+          "label": "Haemoglobin",
+          "latest": 13.1,
+          "unit": "g/dL",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "glucose",
+          "label": "Glucose",
+          "latest": 196,
+          "unit": "mg/dL",
+          "status": "abnormal_but_stable",
+          "reason": "Minor change; no escalation signal."
+        }
+      ],
+      "suppressedPatterns": []
+    },
+    {
+      "patientId": "pt-b",
+      "generatedAt": "2026-09-25T08:00:00.000Z",
+      "asOf": "2026-09-25T08:00:00.000Z",
+      "overallTrajectory": "rapidly_worsening",
+      "overallAttentionState": "concerning",
+      "oneLineSummary": "Rapid, sustained sodium decline over 2 d: 138 → 133 → 127 mmol/L (-11 from admission; -6 since the previous measurement).",
+      "changedSinceLastReview": [
+        {
+          "signal": "oxygen_lpm",
+          "label": "Supplemental oxygen",
+          "unit": "L/min",
+          "previous": 2,
+          "latest": 1,
+          "delta": -1,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "sodium",
+          "label": "Sodium",
+          "unit": "mmol/L",
+          "previous": 133,
+          "latest": 127,
+          "delta": -6,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "unit": "mL/h",
+          "previous": 60,
+          "latest": 52,
+          "delta": -8,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        },
+        {
+          "signal": "wbc",
+          "label": "White cell count",
+          "unit": "×10⁹/L",
+          "previous": 9.8,
+          "latest": 8.7,
+          "delta": -1.1,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        }
+      ],
+      "recognizedPatterns": [
+        {
+          "id": "pt-b:single_signal_trend:sodium",
+          "patternId": "single_signal_trend",
+          "kind": "single_signal_trend",
+          "clinicalDomain": "electrolyte",
+          "title": "Progressive hyponatraemia",
+          "severity": "concerning",
+          "trajectory": "rapidly_worsening",
+          "confidenceLevel": "high",
+          "recognition": {
+            "headline": "Rapid, sustained sodium decline over 2 d: 138 → 133 → 127 mmol/L (-11 from admission; -6 since the previous measurement).",
+            "explanation": "Detected: rapid, sustained decline across 2 consecutive measurements. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "rapid, sustained decline across 2 consecutive measurements",
+            "supportingObservations": [
+              "Sodium: 138 → 133 → 127 mmol/L over 2 d",
+              "Sertraline 50 mg continued Day 0 00:00 — long-term",
+              "Hydrochlorothiazide 25 mg started Day 0 02:00 — for blood pressure",
+              "Day 1 22:00 (nursing): Mild nausea overnight; slightly drowsy this morning but rousable"
+            ]
+          },
+          "prediction": {
+            "trajectory": "rapidly_worsening",
+            "timeHorizon": "hours",
+            "plausibleNextConcern": "symptomatic hyponatraemia (confusion, seizures)",
+            "statement": "At the current rate (≈6 mmol/L/day), sodium could reach ~125 mmol/L within hours, the range in which symptomatic hyponatraemia (confusion, seizures) become more likely.",
+            "reasoning": [
+              "Trajectory classified as \"Rapidly worsening\" from deterministic trend rules (not a statistical model).",
+              "Sertraline 50 mg (continued): recognised cause of hyponatraemia — a temporal association, not a confirmed cause.",
+              "Hydrochlorothiazide 25 mg (started): recognised cause of hyponatraemia — a temporal association, not a confirmed cause.",
+              "Linear extrapolation of the last interval (latest measurement at assessment time): ~121 mmol/L 24 h after that measurement; 125 mmol/L reached in ~8 h from now if unchanged. Extrapolation only; not a validated prediction."
+            ],
+            "uncertainty": [
+              "Serum osmolality: no result recorded this admission.",
+              "Urine osmolality: no result recorded this admission.",
+              "Urine sodium: no result recorded this admission.",
+              "TSH: no result recorded this admission.",
+              "Cortisol (am): no result recorded this admission.",
+              "Several causes remain possible; the data do not identify one."
+            ],
+            "projection": {
+              "signal": "sodium",
+              "measuredHoursAgo": 0,
+              "value24h": 121,
+              "threshold": 125,
+              "hoursToThreshold": 8,
+              "thresholdStatus": "ahead"
+            }
+          },
+          "prevention": {
+            "statement": "Consider: Thiazide- or SSRI-associated hyponatraemia; SIADH (pulmonary, CNS, drug-related); Hypovolaemic hyponatraemia (GI losses, diuretics). Review Sertraline 50 mg, Hydrochlorothiazide 25 mg (recognised cause of hyponatraemia). Check: Paired serum and urine osmolality with urine sodium; Glucose (exclude pseudo-hyponatraemia); Fluid status and free-water intake. Not yet available: Serum osmolality, Urine osmolality, Urine sodium, TSH, Cortisol (am).",
+            "causesToConsider": [
+              "Thiazide- or SSRI-associated hyponatraemia",
+              "SIADH (pulmonary, CNS, drug-related)",
+              "Hypovolaemic hyponatraemia (GI losses, diuretics)",
+              "Hypervolaemic states (heart failure, cirrhosis)",
+              "Adrenal insufficiency or hypothyroidism"
+            ],
+            "contextualFactors": [
+              "Sertraline 50 mg (continued): recognised cause of hyponatraemia",
+              "Hydrochlorothiazide 25 mg (started): recognised cause of hyponatraemia"
+            ],
+            "investigationsToConsider": [
+              "Paired serum and urine osmolality with urine sodium",
+              "Glucose (exclude pseudo-hyponatraemia)"
+            ],
+            "missingInformation": [
+              {
+                "label": "Serum osmolality",
+                "reason": "No result recorded this admission",
+                "signal": "serum_osmolality"
+              },
+              {
+                "label": "Urine osmolality",
+                "reason": "No result recorded this admission",
+                "signal": "urine_osmolality"
+              },
+              {
+                "label": "Urine sodium",
+                "reason": "No result recorded this admission",
+                "signal": "urine_sodium"
+              },
+              {
+                "label": "TSH",
+                "reason": "No result recorded this admission",
+                "signal": "tsh"
+              },
+              {
+                "label": "Cortisol (am)",
+                "reason": "No result recorded this admission",
+                "signal": "cortisol"
+              }
+            ],
+            "reassessmentPoints": [
+              "Fluid status and free-water intake",
+              "Neurological symptoms (nausea, confusion, drowsiness)",
+              "Recently started medications"
+            ],
+            "complicationToAvoid": "symptomatic hyponatraemia (confusion, seizures)"
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "sodium",
+              "label": "Sodium",
+              "unit": "mmol/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-b-sodium-001",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 138
+                },
+                {
+                  "observationId": "pt-b-sodium-002",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 133
+                },
+                {
+                  "observationId": "pt-b-sodium-003",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 127
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -6,
+              "deltaBaseline": -11,
+              "velocityPerDay": -6,
+              "abnormal": "low",
+              "summary": "138 → 133 → 127 mmol/L"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-b-med-037",
+              "name": "Sertraline 50 mg",
+              "classes": [
+                "ssri"
+              ],
+              "action": "continued",
+              "time": "2026-09-23T08:00:00.000Z",
+              "relation": "recognised cause of hyponatraemia",
+              "detail": "long-term"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-b-med-036",
+              "name": "Hydrochlorothiazide 25 mg",
+              "classes": [
+                "thiazide",
+                "antihypertensive"
+              ],
+              "action": "started",
+              "time": "2026-09-23T10:00:00.000Z",
+              "relation": "recognised cause of hyponatraemia",
+              "detail": "for blood pressure"
+            },
+            {
+              "kind": "event",
+              "observationId": "pt-b-nursing-041",
+              "category": "nursing",
+              "time": "2026-09-25T06:00:00.000Z",
+              "description": "Mild nausea overnight; slightly drowsy this morning but rousable"
+            }
+          ],
+          "causesToConsider": [
+            "Thiazide- or SSRI-associated hyponatraemia",
+            "SIADH (pulmonary, CNS, drug-related)",
+            "Hypovolaemic hyponatraemia (GI losses, diuretics)",
+            "Hypervolaemic states (heart failure, cirrhosis)",
+            "Adrenal insufficiency or hypothyroidism"
+          ],
+          "investigationsToConsider": [
+            "Paired serum and urine osmolality with urine sodium",
+            "Glucose (exclude pseudo-hyponatraemia)"
+          ],
+          "missingInformation": [
+            {
+              "label": "Serum osmolality",
+              "reason": "No result recorded this admission",
+              "signal": "serum_osmolality"
+            },
+            {
+              "label": "Urine osmolality",
+              "reason": "No result recorded this admission",
+              "signal": "urine_osmolality"
+            },
+            {
+              "label": "Urine sodium",
+              "reason": "No result recorded this admission",
+              "signal": "urine_sodium"
+            },
+            {
+              "label": "TSH",
+              "reason": "No result recorded this admission",
+              "signal": "tsh"
+            },
+            {
+              "label": "Cortisol (am)",
+              "reason": "No result recorded this admission",
+              "signal": "cortisol"
+            }
+          ],
+          "timeHorizon": "hours",
+          "interruptiveAlertJustified": true,
+          "signals": [
+            "sodium"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 1.6,
+              "rateOfChange": 1.2,
+              "persistence": 2,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 2,
+              "novelty": 1,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 1.6,
+              "rateOfChange": 1.2,
+              "persistence": 1,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 1,
+              "novelty": 0.5,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": 5.3
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": []
+        },
+        {
+          "id": "pt-b:single_signal_trend:oxygen_lpm",
+          "patternId": "single_signal_trend",
+          "kind": "single_signal_trend",
+          "clinicalDomain": "respiratory",
+          "title": "Supplemental oxygen: improving",
+          "severity": "minor",
+          "trajectory": "improving",
+          "confidenceLevel": "moderate",
+          "recognition": {
+            "headline": "Supplemental oxygen improving over 2 d: 2.0 → 2.0 → 1.0 L/min.",
+            "explanation": "Detected: improving, still outside range. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "improving, still outside range",
+            "supportingObservations": [
+              "Supplemental oxygen: 2.0 → 2.0 → 1.0 L/min over 2 d"
+            ]
+          },
+          "prediction": {
+            "trajectory": "improving",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "If the trend continues, supplemental oxygen is likely to return to range. No deterioration is signalled by this value.",
+            "reasoning": [
+              "Trajectory classified as \"Improving\" from deterministic trend rules (not a statistical model)."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "Continue current plan; reassess if the trend reverses.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [
+              "Continue current plan; reassess if the trend reverses"
+            ],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "oxygen_lpm",
+              "label": "Supplemental oxygen",
+              "unit": "L/min",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-b-oxygen_lpm-027",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 2
+                },
+                {
+                  "observationId": "pt-b-oxygen_lpm-028",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 2
+                },
+                {
+                  "observationId": "pt-b-oxygen_lpm-029",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 1
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -1,
+              "deltaBaseline": -1,
+              "velocityPerDay": -1,
+              "abnormal": "high",
+              "summary": "2.0 → 2.0 → 1.0 L/min"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "oxygen_lpm"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 0.5,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": 1,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 0.5,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": -1.5,
+              "noise": 0
+            },
+            "total": -1
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": []
+        }
+      ],
+      "reassuringSignals": [
+        {
+          "signal": "potassium",
+          "label": "Potassium",
+          "latest": 3.8,
+          "unit": "mmol/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "creatinine",
+          "label": "Creatinine",
+          "latest": 0.8,
+          "unit": "mg/dL",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "glucose",
+          "label": "Glucose",
+          "latest": 108,
+          "unit": "mg/dL",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "wbc",
+          "label": "White cell count",
+          "latest": 8.7,
+          "unit": "×10⁹/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "systolic_bp",
+          "label": "Systolic blood pressure",
+          "latest": 138,
+          "unit": "mmHg",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "heart_rate",
+          "label": "Heart rate",
+          "latest": 82,
+          "unit": "/min",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "respiratory_rate",
+          "label": "Respiratory rate",
+          "latest": 18,
+          "unit": "/min",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "spo2",
+          "label": "Oxygen saturation",
+          "latest": 95,
+          "unit": "%",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "temperature",
+          "label": "Temperature",
+          "latest": 37,
+          "unit": "°C",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "latest": 52,
+          "unit": "mL/h",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "oxygen_lpm",
+          "label": "Supplemental oxygen",
+          "latest": 1,
+          "unit": "L/min",
+          "status": "improving",
+          "reason": "Improving; no escalation signal."
+        }
+      ],
+      "suppressedPatterns": []
+    },
+    {
+      "patientId": "pt-f",
+      "generatedAt": "2026-09-25T08:00:00.000Z",
+      "asOf": "2026-09-25T08:00:00.000Z",
+      "overallTrajectory": "worsening",
+      "overallAttentionState": "concerning",
+      "oneLineSummary": "6 signals moving in the same direction over 3 d: Cr 0.90 → 1.80 mg/dL, Urea 5.2 → 12.6 mmol/L, UO 70 → 27 mL/h; also K ↑, HCO3 ↓, SBP ↓.",
+      "changedSinceLastReview": [
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "unit": "mL/h",
+          "previous": 40,
+          "latest": 27,
+          "delta": -13,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "urea",
+          "label": "Urea",
+          "unit": "mmol/L",
+          "previous": 9.4,
+          "latest": 12.6,
+          "delta": 3.2,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "creatinine",
+          "label": "Creatinine",
+          "unit": "mg/dL",
+          "previous": 1.4,
+          "latest": 1.8,
+          "delta": 0.4,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "crp",
+          "label": "C-reactive protein",
+          "unit": "mg/L",
+          "previous": 170,
+          "latest": 140,
+          "delta": -30,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "potassium",
+          "label": "Potassium",
+          "unit": "mmol/L",
+          "previous": 4.6,
+          "latest": 5,
+          "delta": 0.4,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "systolic_bp",
+          "label": "Systolic blood pressure",
+          "unit": "mmHg",
+          "previous": 118,
+          "latest": 112,
+          "delta": -6,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        }
+      ],
+      "recognizedPatterns": [
+        {
+          "id": "pt-f:renal_deterioration",
+          "patternId": "renal_deterioration",
+          "kind": "multi_signal_deterioration",
+          "clinicalDomain": "renal",
+          "title": "Evolving renal deterioration",
+          "severity": "concerning",
+          "trajectory": "worsening",
+          "confidenceLevel": "high",
+          "recognition": {
+            "headline": "6 signals moving in the same direction over 3 d: Cr 0.90 → 1.80 mg/dL, Urea 5.2 → 12.6 mmol/L, UO 70 → 27 mL/h; also K ↑, HCO3 ↓, SBP ↓.",
+            "explanation": "Detected: concordant worsening across 3 core signals in 1 domain(s). Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "concordant worsening across 3 core signals in 1 domain(s)",
+            "supportingObservations": [
+              "Creatinine: 0.90 → 1.10 → 1.40 → 1.80 mg/dL over 3 d",
+              "Urea: 5.2 → 6.9 → 9.4 → 12.6 mmol/L over 3 d",
+              "Urine output: 70 → 55 → 40 → 27 mL/h over 3 d",
+              "Potassium: 4.0 → 4.3 → 4.6 → 5.0 mmol/L over 3 d (supporting)",
+              "Bicarbonate: 24 → 23 → 22 → 21 mmol/L over 3 d (supporting)",
+              "Systolic blood pressure: 128 → 124 → 118 → 112 mmHg over 3 d (supporting)",
+              "Losartan 100 mg continued Day 0 00:00 — long-term",
+              "Diclofenac 50 mg continued Day 0 00:00 — regular, for knee pain",
+              "IV iodinated contrast started Day 0 06:00 — CT abdomen with contrast",
+              "Day 2 22:00 (nursing): Catheter draining concentrated urine; patient thirsty"
+            ]
+          },
+          "prediction": {
+            "trajectory": "worsening",
+            "timeHorizon": "next_24h",
+            "plausibleNextConcern": "acute kidney injury with hyperkalaemia or fluid overload",
+            "statement": "Concordant movement across renal, electrolyte, metabolic, haemodynamic is the kind of trajectory that precedes acute kidney injury with hyperkalaemia or fluid overload. If unchanged, further deterioration within next 24 hours is plausible.",
+            "reasoning": [
+              "Trajectory classified as \"Worsening\" from deterministic trend rules (not a statistical model).",
+              "3 core and 3 supporting signals move concordantly; the combination, not any single value, drives the severity.",
+              "Losartan 100 mg (continued): nephrotoxic or reduces renal perfusion — a temporal association, not a confirmed cause.",
+              "Diclofenac 50 mg (continued): nephrotoxic or reduces renal perfusion — a temporal association, not a confirmed cause.",
+              "IV iodinated contrast (started): nephrotoxic or reduces renal perfusion — a temporal association, not a confirmed cause."
+            ],
+            "uncertainty": [
+              "Urine sodium: no result recorded this admission.",
+              "Which of the candidate causes is operating cannot be determined from the recorded data alone."
+            ],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "Consider: Pre-renal (hypovolaemia, hypotension); Nephrotoxic medication or contrast; Sepsis-associated kidney injury. Review Losartan 100 mg, Diclofenac 50 mg, IV iodinated contrast (nephrotoxic or reduces renal perfusion). Check: Fluid balance and volume assessment; Urinalysis; Renal tract imaging if obstruction possible; Nephrotoxins and RAAS blockers. Not yet available: Urine sodium.",
+            "causesToConsider": [
+              "Pre-renal (hypovolaemia, hypotension)",
+              "Nephrotoxic medication or contrast",
+              "Sepsis-associated kidney injury",
+              "Obstruction"
+            ],
+            "contextualFactors": [
+              "Losartan 100 mg (continued): nephrotoxic or reduces renal perfusion",
+              "Diclofenac 50 mg (continued): nephrotoxic or reduces renal perfusion",
+              "IV iodinated contrast (started): nephrotoxic or reduces renal perfusion"
+            ],
+            "investigationsToConsider": [
+              "Fluid balance and volume assessment",
+              "Urinalysis",
+              "Renal tract imaging if obstruction possible",
+              "Potassium and bicarbonate"
+            ],
+            "missingInformation": [
+              {
+                "label": "Urine sodium",
+                "reason": "No result recorded this admission",
+                "signal": "urine_sodium"
+              }
+            ],
+            "reassessmentPoints": [
+              "Nephrotoxins and RAAS blockers",
+              "Renally dosed medications",
+              "Blood pressure trend"
+            ],
+            "complicationToAvoid": "acute kidney injury with hyperkalaemia or fluid overload"
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "creatinine",
+              "label": "Creatinine",
+              "unit": "mg/dL",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-f-creatinine-001",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 0.9
+                },
+                {
+                  "observationId": "pt-f-creatinine-002",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 1.1
+                },
+                {
+                  "observationId": "pt-f-creatinine-003",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 1.4
+                },
+                {
+                  "observationId": "pt-f-creatinine-004",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 1.8
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 0.40000000000000013,
+              "deltaBaseline": 0.9,
+              "velocityPerDay": 0.40000000000000013,
+              "abnormal": "high",
+              "summary": "0.90 → 1.10 → 1.40 → 1.80 mg/dL"
+            },
+            {
+              "kind": "series",
+              "signal": "urea",
+              "label": "Urea",
+              "unit": "mmol/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-f-urea-005",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 5.2
+                },
+                {
+                  "observationId": "pt-f-urea-006",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 6.9
+                },
+                {
+                  "observationId": "pt-f-urea-007",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 9.4
+                },
+                {
+                  "observationId": "pt-f-urea-008",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 12.6
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 3.1999999999999993,
+              "deltaBaseline": 7.3999999999999995,
+              "velocityPerDay": 3.1999999999999993,
+              "abnormal": "high",
+              "summary": "5.2 → 6.9 → 9.4 → 12.6 mmol/L"
+            },
+            {
+              "kind": "series",
+              "signal": "urine_output",
+              "label": "Urine output",
+              "unit": "mL/h",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-f-urine_output-009",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 70
+                },
+                {
+                  "observationId": "pt-f-urine_output-010",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 55
+                },
+                {
+                  "observationId": "pt-f-urine_output-011",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 40
+                },
+                {
+                  "observationId": "pt-f-urine_output-012",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 27
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -13,
+              "deltaBaseline": -43,
+              "velocityPerDay": -13,
+              "abnormal": "low",
+              "summary": "70 → 55 → 40 → 27 mL/h"
+            },
+            {
+              "kind": "series",
+              "signal": "potassium",
+              "label": "Potassium",
+              "unit": "mmol/L",
+              "role": "supporting",
+              "values": [
+                {
+                  "observationId": "pt-f-potassium-013",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 4
+                },
+                {
+                  "observationId": "pt-f-potassium-014",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 4.3
+                },
+                {
+                  "observationId": "pt-f-potassium-015",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 4.6
+                },
+                {
+                  "observationId": "pt-f-potassium-016",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 5
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 0.40000000000000036,
+              "deltaBaseline": 1,
+              "velocityPerDay": 0.40000000000000036,
+              "abnormal": null,
+              "summary": "4.0 → 4.3 → 4.6 → 5.0 mmol/L"
+            },
+            {
+              "kind": "series",
+              "signal": "bicarbonate",
+              "label": "Bicarbonate",
+              "unit": "mmol/L",
+              "role": "supporting",
+              "values": [
+                {
+                  "observationId": "pt-f-bicarbonate-017",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 24
+                },
+                {
+                  "observationId": "pt-f-bicarbonate-018",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 23
+                },
+                {
+                  "observationId": "pt-f-bicarbonate-019",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 22
+                },
+                {
+                  "observationId": "pt-f-bicarbonate-020",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 21
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -1,
+              "deltaBaseline": -3,
+              "velocityPerDay": -1,
+              "abnormal": "low",
+              "summary": "24 → 23 → 22 → 21 mmol/L"
+            },
+            {
+              "kind": "series",
+              "signal": "systolic_bp",
+              "label": "Systolic blood pressure",
+              "unit": "mmHg",
+              "role": "supporting",
+              "values": [
+                {
+                  "observationId": "pt-f-systolic_bp-021",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 128
+                },
+                {
+                  "observationId": "pt-f-systolic_bp-022",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 124
+                },
+                {
+                  "observationId": "pt-f-systolic_bp-023",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 118
+                },
+                {
+                  "observationId": "pt-f-systolic_bp-024",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 112
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -6,
+              "deltaBaseline": -16,
+              "velocityPerDay": -6,
+              "abnormal": null,
+              "summary": "128 → 124 → 118 → 112 mmHg"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-f-med-053",
+              "name": "Losartan 100 mg",
+              "classes": [
+                "arb",
+                "antihypertensive"
+              ],
+              "action": "continued",
+              "time": "2026-09-22T08:00:00.000Z",
+              "relation": "nephrotoxic or reduces renal perfusion",
+              "detail": "long-term"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-f-med-054",
+              "name": "Diclofenac 50 mg",
+              "classes": [
+                "nsaid"
+              ],
+              "action": "continued",
+              "time": "2026-09-22T08:00:00.000Z",
+              "relation": "nephrotoxic or reduces renal perfusion",
+              "detail": "regular, for knee pain"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-f-med-055",
+              "name": "IV iodinated contrast",
+              "classes": [
+                "contrast"
+              ],
+              "action": "started",
+              "time": "2026-09-22T14:00:00.000Z",
+              "relation": "nephrotoxic or reduces renal perfusion",
+              "detail": "CT abdomen with contrast"
+            },
+            {
+              "kind": "event",
+              "observationId": "pt-f-nursing-059",
+              "category": "nursing",
+              "time": "2026-09-25T06:00:00.000Z",
+              "description": "Catheter draining concentrated urine; patient thirsty"
+            }
+          ],
+          "causesToConsider": [
+            "Pre-renal (hypovolaemia, hypotension)",
+            "Nephrotoxic medication or contrast",
+            "Sepsis-associated kidney injury",
+            "Obstruction"
+          ],
+          "investigationsToConsider": [
+            "Fluid balance and volume assessment",
+            "Urinalysis",
+            "Renal tract imaging if obstruction possible",
+            "Potassium and bicarbonate"
+          ],
+          "missingInformation": [
+            {
+              "label": "Urine sodium",
+              "reason": "No result recorded this admission",
+              "signal": "urine_sodium"
+            }
+          ],
+          "timeHorizon": "next_24h",
+          "interruptiveAlertJustified": true,
+          "signals": [
+            "creatinine",
+            "urea",
+            "urine_output",
+            "potassium",
+            "bicarbonate",
+            "systolic_bp"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 0.688888888888889,
+              "rateOfChange": 0.8000000000000003,
+              "persistence": 3,
+              "acceleration": 0,
+              "crossVariableAgreement": 6,
+              "context": 2,
+              "novelty": 1.5,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 0.688888888888889,
+              "rateOfChange": 0.8000000000000003,
+              "persistence": 1.5,
+              "acceleration": 0,
+              "crossVariableAgreement": 1.7999999999999998,
+              "context": 1,
+              "novelty": 0.75,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": 6.54
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": [
+            "pt-f:single_signal_trend:potassium",
+            "pt-f:single_signal_trend:creatinine",
+            "pt-f:single_signal_trend:urea",
+            "pt-f:single_signal_trend:bicarbonate",
+            "pt-f:single_signal_trend:systolic_bp",
+            "pt-f:single_signal_trend:urine_output"
+          ]
+        },
+        {
+          "id": "pt-f:single_signal_trend:crp",
+          "patternId": "single_signal_trend",
+          "kind": "single_signal_trend",
+          "clinicalDomain": "infection",
+          "title": "C-reactive protein: improving",
+          "severity": "minor",
+          "trajectory": "improving",
+          "confidenceLevel": "high",
+          "recognition": {
+            "headline": "C-reactive protein improving over 3 d: 180 → 210 → 170 → 140 mg/L.",
+            "explanation": "Detected: improving, still outside range. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "improving, still outside range",
+            "supportingObservations": [
+              "C-reactive protein: 180 → 210 → 170 → 140 mg/L over 3 d"
+            ]
+          },
+          "prediction": {
+            "trajectory": "improving",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "If the trend continues, C-reactive protein is likely to return to range. No deterioration is signalled by this value.",
+            "reasoning": [
+              "Trajectory classified as \"Improving\" from deterministic trend rules (not a statistical model)."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "Continue current plan; reassess if the trend reverses.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [
+              "Continue current plan; reassess if the trend reverses"
+            ],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "crp",
+              "label": "C-reactive protein",
+              "unit": "mg/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-f-crp-045",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 180
+                },
+                {
+                  "observationId": "pt-f-crp-046",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 210
+                },
+                {
+                  "observationId": "pt-f-crp-047",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 170
+                },
+                {
+                  "observationId": "pt-f-crp-048",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 140
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -30,
+              "deltaBaseline": -40,
+              "velocityPerDay": -30,
+              "abnormal": "high",
+              "summary": "180 → 210 → 170 → 140 mg/L"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "crp"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 2.7,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": 2,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 2.7,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": -3,
+              "noise": 0
+            },
+            "total": -0.3
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": []
+        },
+        {
+          "id": "pt-f:single_signal_trend:wbc",
+          "patternId": "single_signal_trend",
+          "kind": "single_signal_trend",
+          "clinicalDomain": "infection",
+          "title": "White cell count: improving",
+          "severity": "minor",
+          "trajectory": "improving",
+          "confidenceLevel": "high",
+          "recognition": {
+            "headline": "White cell count improving over 3 d: 14.2 → 13.8 → 12.4 → 11.6 ×10⁹/L.",
+            "explanation": "Detected: improving, still outside range. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "improving, still outside range",
+            "supportingObservations": [
+              "White cell count: 14.2 → 13.8 → 12.4 → 11.6 ×10⁹/L over 3 d"
+            ]
+          },
+          "prediction": {
+            "trajectory": "improving",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "If the trend continues, white cell count is likely to return to range. No deterioration is signalled by this value.",
+            "reasoning": [
+              "Trajectory classified as \"Improving\" from deterministic trend rules (not a statistical model)."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "Continue current plan; reassess if the trend reverses.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [
+              "Continue current plan; reassess if the trend reverses"
+            ],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "wbc",
+              "label": "White cell count",
+              "unit": "×10⁹/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-f-wbc-049",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 14.2
+                },
+                {
+                  "observationId": "pt-f-wbc-050",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 13.8
+                },
+                {
+                  "observationId": "pt-f-wbc-051",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 12.4
+                },
+                {
+                  "observationId": "pt-f-wbc-052",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 11.6
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -0.8000000000000007,
+              "deltaBaseline": -2.5999999999999996,
+              "velocityPerDay": -0.8000000000000007,
+              "abnormal": "high",
+              "summary": "14.2 → 13.8 → 12.4 → 11.6 ×10⁹/L"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "wbc"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 0.19999999999999987,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": 3,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 0.19999999999999987,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": -4.5,
+              "noise": 0
+            },
+            "total": -4.3
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": []
+        }
+      ],
+      "reassuringSignals": [
+        {
+          "signal": "sodium",
+          "label": "Sodium",
+          "latest": 136,
+          "unit": "mmol/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "heart_rate",
+          "label": "Heart rate",
+          "latest": 94,
+          "unit": "/min",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "respiratory_rate",
+          "label": "Respiratory rate",
+          "latest": 19,
+          "unit": "/min",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "spo2",
+          "label": "Oxygen saturation",
+          "latest": 96,
+          "unit": "%",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "temperature",
+          "label": "Temperature",
+          "latest": 37.1,
+          "unit": "°C",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "crp",
+          "label": "C-reactive protein",
+          "latest": 140,
+          "unit": "mg/L",
+          "status": "improving",
+          "reason": "Improving; no escalation signal."
+        },
+        {
+          "signal": "wbc",
+          "label": "White cell count",
+          "latest": 11.6,
+          "unit": "×10⁹/L",
+          "status": "improving",
+          "reason": "Improving; no escalation signal."
+        }
+      ],
+      "suppressedPatterns": []
+    },
+    {
+      "patientId": "pt-g",
+      "generatedAt": "2026-09-25T08:00:00.000Z",
+      "asOf": "2026-09-25T08:00:00.000Z",
+      "overallTrajectory": "worsening",
+      "overallAttentionState": "concerning",
+      "oneLineSummary": "4 signals moving in the same direction over 3 d: Hb 12.6 → 9.1 g/dL, HR 76 → 104 /min, SBP 136 → 108 mmHg; also UO ↓.",
+      "changedSinceLastReview": [
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "unit": "mL/h",
+          "previous": 55,
+          "latest": 45,
+          "delta": -10,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "hemoglobin",
+          "label": "Haemoglobin",
+          "unit": "g/dL",
+          "previous": 10.3,
+          "latest": 9.1,
+          "delta": -1.2,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "systolic_bp",
+          "label": "Systolic blood pressure",
+          "unit": "mmHg",
+          "previous": 122,
+          "latest": 108,
+          "delta": -14,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "heart_rate",
+          "label": "Heart rate",
+          "unit": "/min",
+          "previous": 92,
+          "latest": 104,
+          "delta": 12,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "platelets",
+          "label": "Platelets",
+          "unit": "×10⁹/L",
+          "previous": 210,
+          "latest": 185,
+          "delta": -25,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        }
+      ],
+      "recognizedPatterns": [
+        {
+          "id": "pt-g:occult_bleeding",
+          "patternId": "occult_bleeding",
+          "kind": "multi_signal_deterioration",
+          "clinicalDomain": "hematologic",
+          "title": "Possible occult bleeding",
+          "severity": "concerning",
+          "trajectory": "worsening",
+          "confidenceLevel": "high",
+          "recognition": {
+            "headline": "4 signals moving in the same direction over 3 d: Hb 12.6 → 9.1 g/dL, HR 76 → 104 /min, SBP 136 → 108 mmHg; also UO ↓.",
+            "explanation": "Detected: concordant worsening across 3 core signals in 2 domain(s). Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "concordant worsening across 3 core signals in 2 domain(s)",
+            "supportingObservations": [
+              "Haemoglobin: 12.6 → 11.4 → 10.3 → 9.1 g/dL over 3 d",
+              "Heart rate: 76 → 84 → 92 → 98 → 104 /min over 3 d",
+              "Systolic blood pressure: 136 → 130 → 122 → 116 → 108 mmHg over 3 d",
+              "Urine output: 65 → 60 → 55 → 45 mL/h over 3 d (supporting)",
+              "Apixaban 5 mg BD continued Day 0 00:00 — for atrial fibrillation, restarted post-op",
+              "Enoxaparin 40 mg started Day 0 12:00 — prophylactic dose",
+              "Day 2 10:00 (nursing): Drain output 150 mL dark red overnight; patient reports light-headedness on standing"
+            ]
+          },
+          "prediction": {
+            "trajectory": "worsening",
+            "timeHorizon": "hours",
+            "plausibleNextConcern": "haemorrhagic shock",
+            "statement": "Concordant movement across haematological, haemodynamic, renal is the kind of trajectory that precedes haemorrhagic shock. If unchanged, further deterioration within hours is plausible.",
+            "reasoning": [
+              "Trajectory classified as \"Worsening\" from deterministic trend rules (not a statistical model).",
+              "3 core and 1 supporting signals move concordantly; the combination, not any single value, drives the severity.",
+              "Apixaban 5 mg BD (continued): increases bleeding risk — a temporal association, not a confirmed cause.",
+              "Enoxaparin 40 mg (started): increases bleeding risk — a temporal association, not a confirmed cause."
+            ],
+            "uncertainty": [
+              "INR: no result recorded this admission.",
+              "Lactate: no result recorded this admission.",
+              "Which of the candidate causes is operating cannot be determined from the recorded data alone."
+            ],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "Consider: GI bleeding; Procedural or retroperitoneal bleeding; Haemodilution (less likely with tachycardia). Review Apixaban 5 mg BD, Enoxaparin 40 mg (increases bleeding risk). Check: Repeat haemoglobin; Coagulation profile; Group and save; Anticoagulant timing and dose. Not yet available: INR, Lactate.",
+            "causesToConsider": [
+              "GI bleeding",
+              "Procedural or retroperitoneal bleeding",
+              "Haemodilution (less likely with tachycardia)"
+            ],
+            "contextualFactors": [
+              "Apixaban 5 mg BD (continued): increases bleeding risk",
+              "Enoxaparin 40 mg (started): increases bleeding risk"
+            ],
+            "investigationsToConsider": [
+              "Repeat haemoglobin",
+              "Coagulation profile",
+              "Group and save"
+            ],
+            "missingInformation": [
+              {
+                "label": "INR",
+                "reason": "No result recorded this admission",
+                "signal": "inr"
+              },
+              {
+                "label": "Lactate",
+                "reason": "No result recorded this admission",
+                "signal": "lactate"
+              }
+            ],
+            "reassessmentPoints": [
+              "Anticoagulant timing and dose",
+              "Stool, wound and drain inspection"
+            ],
+            "complicationToAvoid": "haemorrhagic shock"
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "hemoglobin",
+              "label": "Haemoglobin",
+              "unit": "g/dL",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-g-hemoglobin-001",
+                  "time": "2026-09-22T20:00:00.000Z",
+                  "value": 12.6
+                },
+                {
+                  "observationId": "pt-g-hemoglobin-002",
+                  "time": "2026-09-23T14:00:00.000Z",
+                  "value": 11.4
+                },
+                {
+                  "observationId": "pt-g-hemoglobin-003",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 10.3
+                },
+                {
+                  "observationId": "pt-g-hemoglobin-004",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 9.1
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -1.200000000000001,
+              "deltaBaseline": -3.5,
+              "velocityPerDay": -1.200000000000001,
+              "abnormal": "low",
+              "summary": "12.6 → 11.4 → 10.3 → 9.1 g/dL"
+            },
+            {
+              "kind": "series",
+              "signal": "heart_rate",
+              "label": "Heart rate",
+              "unit": "/min",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-g-heart_rate-005",
+                  "time": "2026-09-22T20:00:00.000Z",
+                  "value": 76
+                },
+                {
+                  "observationId": "pt-g-heart_rate-006",
+                  "time": "2026-09-23T14:00:00.000Z",
+                  "value": 84
+                },
+                {
+                  "observationId": "pt-g-heart_rate-007",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 92
+                },
+                {
+                  "observationId": "pt-g-heart_rate-008",
+                  "time": "2026-09-24T20:00:00.000Z",
+                  "value": 98
+                },
+                {
+                  "observationId": "pt-g-heart_rate-009",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 104
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 6,
+              "deltaBaseline": 28,
+              "velocityPerDay": 12,
+              "abnormal": "high",
+              "summary": "76 → 84 → 92 → 98 → 104 /min"
+            },
+            {
+              "kind": "series",
+              "signal": "systolic_bp",
+              "label": "Systolic blood pressure",
+              "unit": "mmHg",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-g-systolic_bp-010",
+                  "time": "2026-09-22T20:00:00.000Z",
+                  "value": 136
+                },
+                {
+                  "observationId": "pt-g-systolic_bp-011",
+                  "time": "2026-09-23T14:00:00.000Z",
+                  "value": 130
+                },
+                {
+                  "observationId": "pt-g-systolic_bp-012",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 122
+                },
+                {
+                  "observationId": "pt-g-systolic_bp-013",
+                  "time": "2026-09-24T20:00:00.000Z",
+                  "value": 116
+                },
+                {
+                  "observationId": "pt-g-systolic_bp-014",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 108
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -8,
+              "deltaBaseline": -28,
+              "velocityPerDay": -16,
+              "abnormal": null,
+              "summary": "136 → 130 → 122 → 116 → 108 mmHg"
+            },
+            {
+              "kind": "series",
+              "signal": "urine_output",
+              "label": "Urine output",
+              "unit": "mL/h",
+              "role": "supporting",
+              "values": [
+                {
+                  "observationId": "pt-g-urine_output-027",
+                  "time": "2026-09-22T20:00:00.000Z",
+                  "value": 65
+                },
+                {
+                  "observationId": "pt-g-urine_output-028",
+                  "time": "2026-09-23T14:00:00.000Z",
+                  "value": 60
+                },
+                {
+                  "observationId": "pt-g-urine_output-029",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 55
+                },
+                {
+                  "observationId": "pt-g-urine_output-030",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 45
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -10,
+              "deltaBaseline": -20,
+              "velocityPerDay": -10,
+              "abnormal": null,
+              "summary": "65 → 60 → 55 → 45 mL/h"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-g-med-042",
+              "name": "Apixaban 5 mg BD",
+              "classes": [
+                "anticoagulant"
+              ],
+              "action": "continued",
+              "time": "2026-09-22T20:00:00.000Z",
+              "relation": "increases bleeding risk",
+              "detail": "for atrial fibrillation, restarted post-op"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-g-med-043",
+              "name": "Enoxaparin 40 mg",
+              "classes": [
+                "anticoagulant"
+              ],
+              "action": "started",
+              "time": "2026-09-23T08:00:00.000Z",
+              "relation": "increases bleeding risk",
+              "detail": "prophylactic dose"
+            },
+            {
+              "kind": "event",
+              "observationId": "pt-g-nursing-046",
+              "category": "nursing",
+              "time": "2026-09-25T06:00:00.000Z",
+              "description": "Drain output 150 mL dark red overnight; patient reports light-headedness on standing"
+            }
+          ],
+          "causesToConsider": [
+            "GI bleeding",
+            "Procedural or retroperitoneal bleeding",
+            "Haemodilution (less likely with tachycardia)"
+          ],
+          "investigationsToConsider": [
+            "Repeat haemoglobin",
+            "Coagulation profile",
+            "Group and save"
+          ],
+          "missingInformation": [
+            {
+              "label": "INR",
+              "reason": "No result recorded this admission",
+              "signal": "inr"
+            },
+            {
+              "label": "Lactate",
+              "reason": "No result recorded this admission",
+              "signal": "lactate"
+            }
+          ],
+          "timeHorizon": "hours",
+          "interruptiveAlertJustified": true,
+          "signals": [
+            "hemoglobin",
+            "heart_rate",
+            "systolic_bp",
+            "urine_output"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 0.7916666666666667,
+              "rateOfChange": 0.9333333333333335,
+              "persistence": 3,
+              "acceleration": 0,
+              "crossVariableAgreement": 4,
+              "context": 2,
+              "novelty": 1.5,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 0.7916666666666667,
+              "rateOfChange": 0.9333333333333335,
+              "persistence": 1.5,
+              "acceleration": 0,
+              "crossVariableAgreement": 1.2,
+              "context": 1,
+              "novelty": 0.75,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": 6.18
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": [
+            "pt-g:single_signal_trend:hemoglobin",
+            "pt-g:single_signal_trend:systolic_bp",
+            "pt-g:single_signal_trend:heart_rate",
+            "pt-g:single_signal_trend:urine_output"
+          ]
+        }
+      ],
+      "reassuringSignals": [
+        {
+          "signal": "sodium",
+          "label": "Sodium",
+          "latest": 137,
+          "unit": "mmol/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "potassium",
+          "label": "Potassium",
+          "latest": 4,
+          "unit": "mmol/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "creatinine",
+          "label": "Creatinine",
+          "latest": 1.1,
+          "unit": "mg/dL",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "platelets",
+          "label": "Platelets",
+          "latest": 185,
+          "unit": "×10⁹/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "respiratory_rate",
+          "label": "Respiratory rate",
+          "latest": 18,
+          "unit": "/min",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "spo2",
+          "label": "Oxygen saturation",
+          "latest": 96,
+          "unit": "%",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "temperature",
+          "label": "Temperature",
+          "latest": 37.2,
+          "unit": "°C",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        }
+      ],
+      "suppressedPatterns": []
+    },
+    {
+      "patientId": "pt-a",
+      "generatedAt": "2026-09-25T08:00:00.000Z",
+      "asOf": "2026-09-25T08:00:00.000Z",
+      "overallTrajectory": "stable",
+      "overallAttentionState": "minor",
+      "oneLineSummary": "Mildly low sodium, essentially unchanged: 133 → 132 mmol/L over 24 h (-1 from admission; -1 since the previous measurement). Change since the previous measurement is small. No escalation signal.",
+      "changedSinceLastReview": [
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "unit": "mL/h",
+          "previous": 60,
+          "latest": 50,
+          "delta": -10,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        },
+        {
+          "signal": "glucose",
+          "label": "Glucose",
+          "unit": "mg/dL",
+          "previous": 104,
+          "latest": 92,
+          "delta": -12,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        },
+        {
+          "signal": "heart_rate",
+          "label": "Heart rate",
+          "unit": "/min",
+          "previous": 76,
+          "latest": 70,
+          "delta": -6,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        },
+        {
+          "signal": "systolic_bp",
+          "label": "Systolic blood pressure",
+          "unit": "mmHg",
+          "previous": 118,
+          "latest": 124,
+          "delta": 6,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        }
+      ],
+      "recognizedPatterns": [
+        {
+          "id": "pt-a:single_signal_trend:sodium",
+          "patternId": "single_signal_trend",
+          "kind": "single_signal_trend",
+          "clinicalDomain": "electrolyte",
+          "title": "Sodium: mildly low, minor change",
+          "severity": "minor",
+          "trajectory": "minor_change",
+          "confidenceLevel": "low",
+          "recognition": {
+            "headline": "Mildly low sodium, essentially unchanged: 133 → 132 mmol/L over 24 h (-1 from admission; -1 since the previous measurement). Change since the previous measurement is small.",
+            "explanation": "Detected: minor change; no escalation signal. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "minor change; no escalation signal",
+            "supportingObservations": [
+              "Sodium: 133 → 132 mmol/L over 24 h"
+            ]
+          },
+          "prediction": {
+            "trajectory": "minor_change",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "No evidence from this trend alone of rapid deterioration. Continue watching the trajectory.",
+            "reasoning": [
+              "Trajectory classified as \"Minor change\" from deterministic trend rules (not a statistical model)."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "No urgent signal generated. Reassess if the change persists or associated clinical changes appear.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "sodium",
+              "label": "Sodium",
+              "unit": "mmol/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-a-sodium-001",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 133
+                },
+                {
+                  "observationId": "pt-a-sodium-002",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 132
+                }
+              ],
+              "direction": "flat",
+              "deltaPrevious": -1,
+              "deltaBaseline": -1,
+              "velocityPerDay": -1,
+              "abnormal": "low",
+              "summary": "133 → 132 mmol/L"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "sodium"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 0.6,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 0.6,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": 0.6
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": []
+        }
+      ],
+      "reassuringSignals": [
+        {
+          "signal": "potassium",
+          "label": "Potassium",
+          "latest": 4,
+          "unit": "mmol/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "creatinine",
+          "label": "Creatinine",
+          "latest": 0.7,
+          "unit": "mg/dL",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "glucose",
+          "label": "Glucose",
+          "latest": 92,
+          "unit": "mg/dL",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "hemoglobin",
+          "label": "Haemoglobin",
+          "latest": 12.5,
+          "unit": "g/dL",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "wbc",
+          "label": "White cell count",
+          "latest": 8.2,
+          "unit": "×10⁹/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "systolic_bp",
+          "label": "Systolic blood pressure",
+          "latest": 124,
+          "unit": "mmHg",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "heart_rate",
+          "label": "Heart rate",
+          "latest": 70,
+          "unit": "/min",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "respiratory_rate",
+          "label": "Respiratory rate",
+          "latest": 15,
+          "unit": "/min",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "spo2",
+          "label": "Oxygen saturation",
+          "latest": 97,
+          "unit": "%",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "temperature",
+          "label": "Temperature",
+          "latest": 36.9,
+          "unit": "°C",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "latest": 50,
+          "unit": "mL/h",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "sodium",
+          "label": "Sodium",
+          "latest": 132,
+          "unit": "mmol/L",
+          "status": "abnormal_but_stable",
+          "reason": "Minor change; no escalation signal."
+        }
+      ],
+      "suppressedPatterns": []
+    },
+    {
+      "patientId": "pt-d",
+      "generatedAt": "2026-09-25T08:00:00.000Z",
+      "asOf": "2026-09-25T08:00:00.000Z",
+      "overallTrajectory": "improving",
+      "overallAttentionState": "minor",
+      "oneLineSummary": "9 previously abnormal signals are improving together over 4 d: Na 129 → 136 mmol/L, WBC 17.5 → 8.1 ×10⁹/L, CRP 240 → 38 mg/L, Lac 2.6 → 1.4 mmol/L, HR 112 → 76 /min, RR 26 → 16 /min, SpO₂ 91 → 97 %, O₂ 4.0 → 0.0 L/min, Temp 38.9 → 36.8 °C.",
+      "changedSinceLastReview": [
+        {
+          "signal": "oxygen_lpm",
+          "label": "Supplemental oxygen",
+          "unit": "L/min",
+          "previous": 1,
+          "latest": 0,
+          "delta": -1,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "crp",
+          "label": "C-reactive protein",
+          "unit": "mg/L",
+          "previous": 70,
+          "latest": 38,
+          "delta": -32,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "wbc",
+          "label": "White cell count",
+          "unit": "×10⁹/L",
+          "previous": 9.8,
+          "latest": 8.1,
+          "delta": -1.7,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "respiratory_rate",
+          "label": "Respiratory rate",
+          "unit": "/min",
+          "previous": 18,
+          "latest": 16,
+          "delta": -2,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "heart_rate",
+          "label": "Heart rate",
+          "unit": "/min",
+          "previous": 84,
+          "latest": 76,
+          "delta": -8,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        },
+        {
+          "signal": "temperature",
+          "label": "Temperature",
+          "unit": "°C",
+          "previous": 37.1,
+          "latest": 36.8,
+          "delta": -0.3,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": true
+        }
+      ],
+      "recognizedPatterns": [
+        {
+          "id": "pt-d:multi_signal_recovery",
+          "patternId": "multi_signal_recovery",
+          "kind": "multi_signal_recovery",
+          "clinicalDomain": "multi_system",
+          "title": "Improving across multiple signals",
+          "severity": "minor",
+          "trajectory": "improving",
+          "confidenceLevel": "high",
+          "recognition": {
+            "headline": "9 previously abnormal signals are improving together over 4 d: Na 129 → 136 mmol/L, WBC 17.5 → 8.1 ×10⁹/L, CRP 240 → 38 mg/L, Lac 2.6 → 1.4 mmol/L, HR 112 → 76 /min, RR 26 → 16 /min, SpO₂ 91 → 97 %, O₂ 4.0 → 0.0 L/min, Temp 38.9 → 36.8 °C.",
+            "explanation": "Detected: 9 previously abnormal signals improving concurrently, none worsening. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "9 previously abnormal signals improving concurrently, none worsening",
+            "supportingObservations": [
+              "Sodium: 129 → 131 → 133 → 135 → 136 mmol/L over 4 d",
+              "White cell count: 17.5 → 15.2 → 12.1 → 9.8 → 8.1 ×10⁹/L over 4 d",
+              "C-reactive protein: 240 → 190 → 120 → 70 → 38 mg/L over 4 d",
+              "Lactate: 2.6 → 1.4 mmol/L over 24 h",
+              "Heart rate: 112 → 102 → 92 → 84 → 76 /min over 4 d",
+              "Respiratory rate: 26 → 23 → 20 → 18 → 16 /min over 4 d",
+              "Oxygen saturation: 91 → 93 → 95 → 96 → 97 % over 4 d",
+              "Supplemental oxygen: 4.0 → 3.0 → 2.0 → 1.0 → 0.0 L/min over 4 d",
+              "Temperature: 38.9 → 38.3 → 37.6 → 37.1 → 36.8 °C over 4 d",
+              "Co-amoxiclav IV started Day 0 01:00",
+              "Enoxaparin 40 mg started Day 0 02:00 — prophylactic dose"
+            ]
+          },
+          "prediction": {
+            "trajectory": "improving",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "Trajectory consistent with response to treatment. Continued improvement is plausible if no new insult occurs.",
+            "reasoning": [
+              "Trajectory classified as \"Improving\" from deterministic trend rules (not a statistical model).",
+              "Co-amoxiclav IV (started): treatment in progress — a temporal association, not a confirmed cause.",
+              "Enoxaparin 40 mg (started): treatment in progress — a temporal association, not a confirmed cause."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "Continue current plan. Consider de-escalation (oxygen, monitoring frequency) as appropriate. Reassess if any signal reverses.",
+            "causesToConsider": [],
+            "contextualFactors": [
+              "Co-amoxiclav IV (started): treatment in progress",
+              "Enoxaparin 40 mg (started): treatment in progress"
+            ],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [
+              "Continue current plan",
+              "Consider de-escalation (oxygen, monitoring frequency) as appropriate",
+              "Reassess if any signal reverses"
+            ],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "sodium",
+              "label": "Sodium",
+              "unit": "mmol/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-d-sodium-036",
+                  "time": "2026-09-21T08:00:00.000Z",
+                  "value": 129
+                },
+                {
+                  "observationId": "pt-d-sodium-037",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 131
+                },
+                {
+                  "observationId": "pt-d-sodium-038",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 133
+                },
+                {
+                  "observationId": "pt-d-sodium-039",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 135
+                },
+                {
+                  "observationId": "pt-d-sodium-040",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 136
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 1,
+              "deltaBaseline": 7,
+              "velocityPerDay": 1,
+              "abnormal": null,
+              "summary": "129 → 131 → 133 → 135 → 136 mmol/L"
+            },
+            {
+              "kind": "series",
+              "signal": "wbc",
+              "label": "White cell count",
+              "unit": "×10⁹/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-d-wbc-031",
+                  "time": "2026-09-21T08:00:00.000Z",
+                  "value": 17.5
+                },
+                {
+                  "observationId": "pt-d-wbc-032",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 15.2
+                },
+                {
+                  "observationId": "pt-d-wbc-033",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 12.1
+                },
+                {
+                  "observationId": "pt-d-wbc-034",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 9.8
+                },
+                {
+                  "observationId": "pt-d-wbc-035",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 8.1
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -1.700000000000001,
+              "deltaBaseline": -9.4,
+              "velocityPerDay": -1.700000000000001,
+              "abnormal": null,
+              "summary": "17.5 → 15.2 → 12.1 → 9.8 → 8.1 ×10⁹/L"
+            },
+            {
+              "kind": "series",
+              "signal": "crp",
+              "label": "C-reactive protein",
+              "unit": "mg/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-d-crp-026",
+                  "time": "2026-09-21T08:00:00.000Z",
+                  "value": 240
+                },
+                {
+                  "observationId": "pt-d-crp-027",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 190
+                },
+                {
+                  "observationId": "pt-d-crp-028",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 120
+                },
+                {
+                  "observationId": "pt-d-crp-029",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 70
+                },
+                {
+                  "observationId": "pt-d-crp-030",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 38
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -32,
+              "deltaBaseline": -202,
+              "velocityPerDay": -32,
+              "abnormal": "high",
+              "summary": "240 → 190 → 120 → 70 → 38 mg/L"
+            },
+            {
+              "kind": "series",
+              "signal": "lactate",
+              "label": "Lactate",
+              "unit": "mmol/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-d-lactate-051",
+                  "time": "2026-09-21T08:00:00.000Z",
+                  "value": 2.6
+                },
+                {
+                  "observationId": "pt-d-lactate-052",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 1.4
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -1.2000000000000002,
+              "deltaBaseline": -1.2000000000000002,
+              "velocityPerDay": -1.2000000000000002,
+              "abnormal": null,
+              "summary": "2.6 → 1.4 mmol/L"
+            },
+            {
+              "kind": "series",
+              "signal": "heart_rate",
+              "label": "Heart rate",
+              "unit": "/min",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-d-heart_rate-016",
+                  "time": "2026-09-21T08:00:00.000Z",
+                  "value": 112
+                },
+                {
+                  "observationId": "pt-d-heart_rate-017",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 102
+                },
+                {
+                  "observationId": "pt-d-heart_rate-018",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 92
+                },
+                {
+                  "observationId": "pt-d-heart_rate-019",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 84
+                },
+                {
+                  "observationId": "pt-d-heart_rate-020",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 76
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -8,
+              "deltaBaseline": -36,
+              "velocityPerDay": -8,
+              "abnormal": null,
+              "summary": "112 → 102 → 92 → 84 → 76 /min"
+            },
+            {
+              "kind": "series",
+              "signal": "respiratory_rate",
+              "label": "Respiratory rate",
+              "unit": "/min",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-d-respiratory_rate-006",
+                  "time": "2026-09-21T08:00:00.000Z",
+                  "value": 26
+                },
+                {
+                  "observationId": "pt-d-respiratory_rate-007",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 23
+                },
+                {
+                  "observationId": "pt-d-respiratory_rate-008",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 20
+                },
+                {
+                  "observationId": "pt-d-respiratory_rate-009",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 18
+                },
+                {
+                  "observationId": "pt-d-respiratory_rate-010",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 16
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -2,
+              "deltaBaseline": -10,
+              "velocityPerDay": -2,
+              "abnormal": null,
+              "summary": "26 → 23 → 20 → 18 → 16 /min"
+            },
+            {
+              "kind": "series",
+              "signal": "spo2",
+              "label": "Oxygen saturation",
+              "unit": "%",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-d-spo2-011",
+                  "time": "2026-09-21T08:00:00.000Z",
+                  "value": 91
+                },
+                {
+                  "observationId": "pt-d-spo2-012",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 93
+                },
+                {
+                  "observationId": "pt-d-spo2-013",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 95
+                },
+                {
+                  "observationId": "pt-d-spo2-014",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 96
+                },
+                {
+                  "observationId": "pt-d-spo2-015",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 97
+                }
+              ],
+              "direction": "up",
+              "deltaPrevious": 1,
+              "deltaBaseline": 6,
+              "velocityPerDay": 1,
+              "abnormal": null,
+              "summary": "91 → 93 → 95 → 96 → 97 %"
+            },
+            {
+              "kind": "series",
+              "signal": "oxygen_lpm",
+              "label": "Supplemental oxygen",
+              "unit": "L/min",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-d-oxygen_lpm-001",
+                  "time": "2026-09-21T08:00:00.000Z",
+                  "value": 4
+                },
+                {
+                  "observationId": "pt-d-oxygen_lpm-002",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 3
+                },
+                {
+                  "observationId": "pt-d-oxygen_lpm-003",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 2
+                },
+                {
+                  "observationId": "pt-d-oxygen_lpm-004",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 1
+                },
+                {
+                  "observationId": "pt-d-oxygen_lpm-005",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 0
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -1,
+              "deltaBaseline": -4,
+              "velocityPerDay": -1,
+              "abnormal": null,
+              "summary": "4.0 → 3.0 → 2.0 → 1.0 → 0.0 L/min"
+            },
+            {
+              "kind": "series",
+              "signal": "temperature",
+              "label": "Temperature",
+              "unit": "°C",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-d-temperature-021",
+                  "time": "2026-09-21T08:00:00.000Z",
+                  "value": 38.9
+                },
+                {
+                  "observationId": "pt-d-temperature-022",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 38.3
+                },
+                {
+                  "observationId": "pt-d-temperature-023",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 37.6
+                },
+                {
+                  "observationId": "pt-d-temperature-024",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 37.1
+                },
+                {
+                  "observationId": "pt-d-temperature-025",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 36.8
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -0.30000000000000426,
+              "deltaBaseline": -2.1000000000000014,
+              "velocityPerDay": -0.30000000000000426,
+              "abnormal": null,
+              "summary": "38.9 → 38.3 → 37.6 → 37.1 → 36.8 °C"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-d-med-058",
+              "name": "Co-amoxiclav IV",
+              "classes": [
+                "antibiotic"
+              ],
+              "action": "started",
+              "time": "2026-09-21T09:00:00.000Z",
+              "relation": "treatment in progress"
+            },
+            {
+              "kind": "medication",
+              "observationId": "pt-d-med-061",
+              "name": "Enoxaparin 40 mg",
+              "classes": [
+                "anticoagulant"
+              ],
+              "action": "started",
+              "time": "2026-09-21T10:00:00.000Z",
+              "relation": "treatment in progress",
+              "detail": "prophylactic dose"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "sodium",
+            "wbc",
+            "crp",
+            "lactate",
+            "heart_rate",
+            "respiratory_rate",
+            "spo2",
+            "oxygen_lpm",
+            "temperature"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 0.66,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": 3,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 0.66,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 0,
+              "treatmentResponse": -4.5,
+              "noise": 0
+            },
+            "total": -3.84
+          },
+          "suppressedReason": null,
+          "absorbedPatternIds": [
+            "pt-d:single_signal_trend:sodium",
+            "pt-d:single_signal_trend:wbc",
+            "pt-d:single_signal_trend:crp",
+            "pt-d:single_signal_trend:lactate",
+            "pt-d:single_signal_trend:heart_rate",
+            "pt-d:single_signal_trend:respiratory_rate",
+            "pt-d:single_signal_trend:spo2",
+            "pt-d:single_signal_trend:oxygen_lpm",
+            "pt-d:single_signal_trend:temperature"
+          ]
+        }
+      ],
+      "reassuringSignals": [
+        {
+          "signal": "creatinine",
+          "label": "Creatinine",
+          "latest": 0.9,
+          "unit": "mg/dL",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "systolic_bp",
+          "label": "Systolic blood pressure",
+          "latest": 124,
+          "unit": "mmHg",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "latest": 70,
+          "unit": "mL/h",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        }
+      ],
+      "suppressedPatterns": []
+    },
+    {
+      "patientId": "pt-e",
+      "generatedAt": "2026-09-25T08:00:00.000Z",
+      "asOf": "2026-09-25T08:00:00.000Z",
+      "overallTrajectory": "stable",
+      "overallAttentionState": "stable",
+      "oneLineSummary": "No new patterns. 5 chronic abnormalities at known baseline; all other observed signals within range.",
+      "changedSinceLastReview": [
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "unit": "mL/h",
+          "previous": 40,
+          "latest": 48,
+          "delta": 8,
+          "direction": "up",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        },
+        {
+          "signal": "creatinine",
+          "label": "Creatinine",
+          "unit": "mg/dL",
+          "previous": 3.3,
+          "latest": 3.1,
+          "delta": -0.2,
+          "direction": "down",
+          "time": "2026-09-25T08:00:00.000Z",
+          "partOfPattern": false
+        }
+      ],
+      "recognizedPatterns": [],
+      "reassuringSignals": [
+        {
+          "signal": "sodium",
+          "label": "Sodium",
+          "latest": 139,
+          "unit": "mmol/L",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "glucose",
+          "label": "Glucose",
+          "latest": 134,
+          "unit": "mg/dL",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "systolic_bp",
+          "label": "Systolic blood pressure",
+          "latest": 136,
+          "unit": "mmHg",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "heart_rate",
+          "label": "Heart rate",
+          "latest": 66,
+          "unit": "/min",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "respiratory_rate",
+          "label": "Respiratory rate",
+          "latest": 16,
+          "unit": "/min",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "spo2",
+          "label": "Oxygen saturation",
+          "latest": 97,
+          "unit": "%",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "temperature",
+          "label": "Temperature",
+          "latest": 36.7,
+          "unit": "°C",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "urine_output",
+          "label": "Urine output",
+          "latest": 48,
+          "unit": "mL/h",
+          "status": "within_range",
+          "reason": "Within range; no movement beyond measurement noise."
+        },
+        {
+          "signal": "creatinine",
+          "label": "Creatinine",
+          "latest": 3.1,
+          "unit": "mg/dL",
+          "status": "chronic_baseline",
+          "reason": "Consistent with known chronic baseline (3.10 mg/dL); no new trend."
+        },
+        {
+          "signal": "urea",
+          "label": "Urea",
+          "latest": 18,
+          "unit": "mmol/L",
+          "status": "chronic_baseline",
+          "reason": "Consistent with known chronic baseline (18.0 mmol/L); no new trend."
+        },
+        {
+          "signal": "hemoglobin",
+          "label": "Haemoglobin",
+          "latest": 9.7,
+          "unit": "g/dL",
+          "status": "chronic_baseline",
+          "reason": "Consistent with known chronic baseline (9.8 g/dL); no new trend."
+        },
+        {
+          "signal": "potassium",
+          "label": "Potassium",
+          "latest": 5.2,
+          "unit": "mmol/L",
+          "status": "chronic_baseline",
+          "reason": "Consistent with known chronic baseline (5.2 mmol/L); no new trend."
+        },
+        {
+          "signal": "bicarbonate",
+          "label": "Bicarbonate",
+          "latest": 21,
+          "unit": "mmol/L",
+          "status": "chronic_baseline",
+          "reason": "Consistent with known chronic baseline (20 mmol/L); no new trend."
+        }
+      ],
+      "suppressedPatterns": [
+        {
+          "id": "pt-e:chronic_stable_abnormality:creatinine",
+          "patternId": "chronic_stable_abnormality",
+          "kind": "chronic_stable_abnormality",
+          "clinicalDomain": "renal",
+          "title": "Creatinine: stable chronic abnormality",
+          "severity": "stable",
+          "trajectory": "stable",
+          "confidenceLevel": "moderate",
+          "recognition": {
+            "headline": "Creatinine 3.10 mg/dL: outside the reference range but unchanged from the known baseline of 3.10 across 3 d of observation.",
+            "explanation": "Detected: abnormal but unchanged from known baseline. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "abnormal but unchanged from known baseline",
+            "supportingObservations": [
+              "Creatinine: 3.20 → 3.10 → 3.30 → 3.10 mg/dL over 3 d"
+            ]
+          },
+          "prediction": {
+            "trajectory": "stable",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "No new trajectory. This value is behaving as expected for this patient; no deterioration is signalled by it.",
+            "reasoning": [
+              "Trajectory classified as \"Stable\" from deterministic trend rules (not a statistical model).",
+              "Difference from chronic baseline (0.00) is within measurement noise."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "No action prompted by this value. It will be re-evaluated if it moves away from baseline.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "creatinine",
+              "label": "Creatinine",
+              "unit": "mg/dL",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-e-creatinine-001",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 3.2
+                },
+                {
+                  "observationId": "pt-e-creatinine-002",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 3.1
+                },
+                {
+                  "observationId": "pt-e-creatinine-003",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 3.3
+                },
+                {
+                  "observationId": "pt-e-creatinine-004",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 3.1
+                }
+              ],
+              "direction": "down",
+              "deltaPrevious": -0.19999999999999973,
+              "deltaBaseline": 0,
+              "velocityPerDay": -0.19999999999999973,
+              "abnormal": "high",
+              "summary": "3.20 → 3.10 → 3.30 → 3.10 mg/dL"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "creatinine"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 3,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 1,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 3,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": -2,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": 1
+          },
+          "suppressedReason": "Consistent with known chronic baseline (3.10 mg/dL); no new trend.",
+          "absorbedPatternIds": []
+        },
+        {
+          "id": "pt-e:chronic_stable_abnormality:urea",
+          "patternId": "chronic_stable_abnormality",
+          "kind": "chronic_stable_abnormality",
+          "clinicalDomain": "renal",
+          "title": "Urea: stable chronic abnormality",
+          "severity": "stable",
+          "trajectory": "stable",
+          "confidenceLevel": "low",
+          "recognition": {
+            "headline": "Urea 18.0 mmol/L: outside the reference range but unchanged from the known baseline of 18.0 across 3 d of observation.",
+            "explanation": "Detected: abnormal but unchanged from known baseline. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "abnormal but unchanged from known baseline",
+            "supportingObservations": [
+              "Urea: 18.2 → 17.6 → 18.5 → 18.0 mmol/L over 3 d"
+            ]
+          },
+          "prediction": {
+            "trajectory": "stable",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "No new trajectory. This value is behaving as expected for this patient; no deterioration is signalled by it.",
+            "reasoning": [
+              "Trajectory classified as \"Stable\" from deterministic trend rules (not a statistical model).",
+              "Difference from chronic baseline (0.0) is within measurement noise."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "No action prompted by this value. It will be re-evaluated if it moves away from baseline.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "urea",
+              "label": "Urea",
+              "unit": "mmol/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-e-urea-005",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 18.2
+                },
+                {
+                  "observationId": "pt-e-urea-006",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 17.6
+                },
+                {
+                  "observationId": "pt-e-urea-007",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 18.5
+                },
+                {
+                  "observationId": "pt-e-urea-008",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 18
+                }
+              ],
+              "direction": "flat",
+              "deltaPrevious": -0.5,
+              "deltaBaseline": 0,
+              "velocityPerDay": -0.5,
+              "abnormal": "high",
+              "summary": "18.2 → 17.6 → 18.5 → 18.0 mmol/L"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "urea"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 3,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 1,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 3,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": -2,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": 1
+          },
+          "suppressedReason": "Consistent with known chronic baseline (18.0 mmol/L); no new trend.",
+          "absorbedPatternIds": []
+        },
+        {
+          "id": "pt-e:chronic_stable_abnormality:hemoglobin",
+          "patternId": "chronic_stable_abnormality",
+          "kind": "chronic_stable_abnormality",
+          "clinicalDomain": "hematologic",
+          "title": "Haemoglobin: stable chronic abnormality",
+          "severity": "stable",
+          "trajectory": "stable",
+          "confidenceLevel": "low",
+          "recognition": {
+            "headline": "Haemoglobin 9.7 g/dL: outside the reference range but unchanged from the known baseline of 9.8 across 3 d of observation.",
+            "explanation": "Detected: abnormal but unchanged from known baseline. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "abnormal but unchanged from known baseline",
+            "supportingObservations": [
+              "Haemoglobin: 9.9 → 9.7 → 9.8 → 9.7 g/dL over 3 d"
+            ]
+          },
+          "prediction": {
+            "trajectory": "stable",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "No new trajectory. This value is behaving as expected for this patient; no deterioration is signalled by it.",
+            "reasoning": [
+              "Trajectory classified as \"Stable\" from deterministic trend rules (not a statistical model).",
+              "Difference from chronic baseline (-0.1) is within measurement noise."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "No action prompted by this value. It will be re-evaluated if it moves away from baseline.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "hemoglobin",
+              "label": "Haemoglobin",
+              "unit": "g/dL",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-e-hemoglobin-009",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 9.9
+                },
+                {
+                  "observationId": "pt-e-hemoglobin-010",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 9.7
+                },
+                {
+                  "observationId": "pt-e-hemoglobin-011",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 9.8
+                },
+                {
+                  "observationId": "pt-e-hemoglobin-012",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 9.7
+                }
+              ],
+              "direction": "flat",
+              "deltaPrevious": -0.10000000000000142,
+              "deltaBaseline": -0.10000000000000142,
+              "velocityPerDay": -0.10000000000000142,
+              "abnormal": "low",
+              "summary": "9.9 → 9.7 → 9.8 → 9.7 g/dL"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "hemoglobin"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 2.3000000000000007,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 1,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 2.3000000000000007,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": -2,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": 0.3
+          },
+          "suppressedReason": "Consistent with known chronic baseline (9.8 g/dL); no new trend.",
+          "absorbedPatternIds": []
+        },
+        {
+          "id": "pt-e:chronic_stable_abnormality:potassium",
+          "patternId": "chronic_stable_abnormality",
+          "kind": "chronic_stable_abnormality",
+          "clinicalDomain": "electrolyte",
+          "title": "Potassium: stable chronic abnormality",
+          "severity": "stable",
+          "trajectory": "stable",
+          "confidenceLevel": "low",
+          "recognition": {
+            "headline": "Potassium 5.2 mmol/L: outside the reference range but unchanged from the known baseline of 5.2 across 3 d of observation.",
+            "explanation": "Detected: abnormal but unchanged from known baseline. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "abnormal but unchanged from known baseline",
+            "supportingObservations": [
+              "Potassium: 5.2 → 5.1 → 5.3 → 5.2 mmol/L over 3 d"
+            ]
+          },
+          "prediction": {
+            "trajectory": "stable",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "No new trajectory. This value is behaving as expected for this patient; no deterioration is signalled by it.",
+            "reasoning": [
+              "Trajectory classified as \"Stable\" from deterministic trend rules (not a statistical model).",
+              "Difference from chronic baseline (0.0) is within measurement noise."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "No action prompted by this value. It will be re-evaluated if it moves away from baseline.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "potassium",
+              "label": "Potassium",
+              "unit": "mmol/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-e-potassium-013",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 5.2
+                },
+                {
+                  "observationId": "pt-e-potassium-014",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 5.1
+                },
+                {
+                  "observationId": "pt-e-potassium-015",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 5.3
+                },
+                {
+                  "observationId": "pt-e-potassium-016",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 5.2
+                }
+              ],
+              "direction": "flat",
+              "deltaPrevious": -0.09999999999999964,
+              "deltaBaseline": 0,
+              "velocityPerDay": -0.09999999999999964,
+              "abnormal": "high",
+              "summary": "5.2 → 5.1 → 5.3 → 5.2 mmol/L"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "potassium"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 0.40000000000000036,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 1,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 0.40000000000000036,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": -2,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": -1.6
+          },
+          "suppressedReason": "Consistent with known chronic baseline (5.2 mmol/L); no new trend.",
+          "absorbedPatternIds": []
+        },
+        {
+          "id": "pt-e:chronic_stable_abnormality:bicarbonate",
+          "patternId": "chronic_stable_abnormality",
+          "kind": "chronic_stable_abnormality",
+          "clinicalDomain": "metabolic",
+          "title": "Bicarbonate: stable chronic abnormality",
+          "severity": "stable",
+          "trajectory": "stable",
+          "confidenceLevel": "low",
+          "recognition": {
+            "headline": "Bicarbonate 21 mmol/L: outside the reference range but unchanged from the known baseline of 20 across 3 d of observation.",
+            "explanation": "Detected: abnormal but unchanged from known baseline. Classified by deterministic trend rules, not a statistical model.",
+            "detectedTrend": "abnormal but unchanged from known baseline",
+            "supportingObservations": [
+              "Bicarbonate: 20 → 21 → 20 → 21 mmol/L over 3 d"
+            ]
+          },
+          "prediction": {
+            "trajectory": "stable",
+            "timeHorizon": null,
+            "plausibleNextConcern": null,
+            "statement": "No new trajectory. This value is behaving as expected for this patient; no deterioration is signalled by it.",
+            "reasoning": [
+              "Trajectory classified as \"Stable\" from deterministic trend rules (not a statistical model).",
+              "Difference from chronic baseline (1) is within measurement noise."
+            ],
+            "uncertainty": [],
+            "projection": null
+          },
+          "prevention": {
+            "statement": "No action prompted by this value. It will be re-evaluated if it moves away from baseline.",
+            "causesToConsider": [],
+            "contextualFactors": [],
+            "investigationsToConsider": [],
+            "missingInformation": [],
+            "reassessmentPoints": [],
+            "complicationToAvoid": null
+          },
+          "evidence": [
+            {
+              "kind": "series",
+              "signal": "bicarbonate",
+              "label": "Bicarbonate",
+              "unit": "mmol/L",
+              "role": "core",
+              "values": [
+                {
+                  "observationId": "pt-e-bicarbonate-017",
+                  "time": "2026-09-22T08:00:00.000Z",
+                  "value": 20
+                },
+                {
+                  "observationId": "pt-e-bicarbonate-018",
+                  "time": "2026-09-23T08:00:00.000Z",
+                  "value": 21
+                },
+                {
+                  "observationId": "pt-e-bicarbonate-019",
+                  "time": "2026-09-24T08:00:00.000Z",
+                  "value": 20
+                },
+                {
+                  "observationId": "pt-e-bicarbonate-020",
+                  "time": "2026-09-25T08:00:00.000Z",
+                  "value": 21
+                }
+              ],
+              "direction": "flat",
+              "deltaPrevious": 1,
+              "deltaBaseline": 1,
+              "velocityPerDay": 1,
+              "abnormal": "low",
+              "summary": "20 → 21 → 20 → 21 mmol/L"
+            }
+          ],
+          "causesToConsider": [],
+          "investigationsToConsider": [],
+          "missingInformation": [],
+          "timeHorizon": null,
+          "interruptiveAlertJustified": false,
+          "signals": [
+            "bicarbonate"
+          ],
+          "importance": {
+            "components": {
+              "magnitude": 0.3333333333333333,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": 1,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "contributions": {
+              "magnitude": 0.3333333333333333,
+              "rateOfChange": 0,
+              "persistence": 0,
+              "acceleration": 0,
+              "crossVariableAgreement": 0,
+              "context": 0,
+              "novelty": 0,
+              "chronicBaseline": -2,
+              "treatmentResponse": 0,
+              "noise": 0
+            },
+            "total": -1.67
+          },
+          "suppressedReason": "Consistent with known chronic baseline (20 mmol/L); no new trend.",
+          "absorbedPatternIds": []
+        }
+      ]
+    }
+  ]
+}
